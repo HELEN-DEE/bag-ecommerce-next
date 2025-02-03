@@ -4,6 +4,7 @@ import React from 'react'
 // import { RiPokerHeartsLine } from "react-icons/ri";
 // import { MdOutlinePerson } from "react-icons/md";
 // import { HiShoppingBag } from "react-icons/hi";
+import { Heart } from 'lucide-react';
 
 const Navbar = () => {
   return (
@@ -20,7 +21,7 @@ const Navbar = () => {
 
             <div className='flex gap-4'>
                 <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
-                    {/* <RiPokerHeartsLine size={15}/> */}
+                <Heart />
                 </div>
                 <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
                     {/* <PiHandbagBold size={15}/> */}

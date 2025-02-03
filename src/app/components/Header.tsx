@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-
+import { ArrowRight } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -27,7 +27,7 @@ const Header = () => {
                         </div>
                         <button className='capitalize flex items-center gap-2 bg-white rounded-full px-5 py-2 border border-[#dad8d8]'>
                             Start shopping
-                            {/* <HiArrowRight size={15} className=''/> */}
+                            <ArrowRight size={20}/>
                         </button>
                     </div>
                 </div>
