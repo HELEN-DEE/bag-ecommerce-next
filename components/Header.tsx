@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
+import headerImg from '@/assets/luxury-bag.png'
+
 import { ArrowRight } from 'lucide-react';
 
 const Header = () => {
@@ -46,7 +48,7 @@ const Header = () => {
                     </button>
                 </div>
             <div className='absolute top-0 left-0 right-0 flex justify-center '>
-                {/* <Image src={headerImg} alt="Luxury Bag" className='w-[440px]' /> */}
+                <Image src= {headerImg} alt="Luxury Bag" className='w-[440px]' />
             </div>
         </div>
     </section>
