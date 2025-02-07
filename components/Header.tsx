@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import headerImg from '@/assets/luxury-bag.png'
+// import headerImg from '@/assets/luxury-bag.png'
 
 import { ArrowRight } from 'lucide-react';
 
@@ -22,7 +22,7 @@ const Header = () => {
                     </div>
                     <div className='w-[40%]'>
                         <div className='flex gap-2'>
-                            {/* <HiMiniArrowDownRight size={25} /> */}
+                            <ArrowRight/>
                             <p>
                                 Discover the epitome of style and craftmanship without curated leather bag collection 
                             </p>
@@ -48,7 +48,7 @@ const Header = () => {
                     </button>
                 </div>
             <div className='absolute top-0 left-0 right-0 flex justify-center '>
-                <Image src= {headerImg} alt="Luxury Bag" className='w-[440px]' />
+                {/* <Image src= {headerImg} alt="Luxury Bag" className='w-[440px]' /> */}
             </div>
         </div>
     </section>
