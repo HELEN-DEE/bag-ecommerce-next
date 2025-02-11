@@ -20,7 +20,7 @@ const Navbar = () => {
                 <h1 className='text-lg font-bold'>Bagstore</h1>
             </div>
 
-            <div className='flex gap-4'>
+            <div className='flex gap-3'>
                 <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
                     <Heart size={15}/>
                 </div>
