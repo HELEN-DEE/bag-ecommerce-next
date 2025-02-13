@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import Header from "../components/Header";
 import BrandSupport from "../components/BrandSupport";
+import Products from "../components/Products";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <SearchBar />
       <Header />
       <BrandSupport/>
+      <Products/>
 
       
     </div>

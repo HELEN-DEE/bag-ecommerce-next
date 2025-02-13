@@ -1,0 +1,55 @@
+import React from 'react'
+import { Box } from 'lucide-react';;
+import { CreditCard } from 'lucide-react';
+import { PiNumberCircleSeven } from "react-icons/pi";
+import { IoCalendarNumberSharp } from 'react-icons/io5';
+
+const supportItems = [
+  {
+    icon: <Box size={50} />,
+    title: 'Express delivery',
+    description: 'DHL express delivery worldwide from our bag company'
+  },
+  {
+    icon: <CreditCard size={50} />,
+    title: 'Payment in 3x',
+    description: 'Take advantage of a purchase with 3x without fees from $100 of purchase'
+  },
+  {
+    icon: <PiNumberCircleSeven size={50} />,
+    title: 'Free returns',
+    description: 'Free returns for 7 days to any order delivered in france' 
+  }
+]
+
+const Support = () => {
+  return (
+    <section className='mx-4 my-8'>
+        <div>
+            <h1 className='capitalize text-4xl text-center my-8'>
+              we support
+            </h1>
+            <div className='flex justify-between gap-2'>
+              {supportItems.map((item,index) =>(
+                <div key={index} className='text-center bg-[#F4F4F4] px-16 py-2 rounded-xl'>
+                  <span className='flex justify-center'>
+                    {item.icon}
+                  </span>
+                  <h3 className='uppercase text-2xl'>
+                    {item.title}
+                  </h3>
+                  <p>
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+              
+            </div>
+        </div>
+    </section>
+    )
+  }
+
+
+
+export default Support
