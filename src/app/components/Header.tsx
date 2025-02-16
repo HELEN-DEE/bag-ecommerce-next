@@ -23,7 +23,7 @@ const Header = () => {
                     </div>
                     <div className='w-[40%]'>
                         <div className='flex gap-2'>
-                            <ArrowDownRight size={20}/>
+                            <ArrowDownRight size={20}/> 
                             <p>
                                 Discover the epitome of style and craftmanship without curated leather bag collection 
                             </p>
