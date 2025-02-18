@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { BriefcaseBusiness, Heart } from 'lucide-react'
+import { PiHandbag, PiHandbagBold } from "react-icons/pi";
+import { RiPokerHeartsLine } from "react-icons/ri";
 // images
 import bagImage1 from '../../public/bag-image-1.png'
 import bagImage2 from '../../public/bag-image-2.png'
@@ -57,10 +58,10 @@ const Products = () => {
                                 </span>
                                 <div className="flex flex-row gap-2">
                                     <span className='bg-white rounded-full w-8 h-8 flex items-center justify-center'>
-                                        <BriefcaseBusiness size={18} />
+                                        <PiHandbag size={18} />
                                     </span>
                                     <span className='bg-white rounded-full w-8 h-8 flex items-center justify-center'>
-                                        <Heart size={18} />
+                                        <RiPokerHeartsLine size={18} />
                                     </span>
                                 </div>
                             </div>

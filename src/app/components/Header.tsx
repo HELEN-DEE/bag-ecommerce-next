@@ -33,7 +33,7 @@ const Header = () => {
                             <ArrowRight size={20}/>
                         </button>
                     </div>
-                </div>
+                </div>c'
                 <div className='flex justify-between'>
                     <div className='text-base w-[50%] mx-auto uppercase py-6'>
                         <p>2024-</p>

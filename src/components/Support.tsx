@@ -1,17 +1,16 @@
 import React from 'react'
-import { Box } from 'lucide-react';;
-import { CreditCard } from 'lucide-react';
+import { RiBox3Line } from "react-icons/ri";
+import { CgCreditCard } from "react-icons/cg";
 import { PiNumberCircleSeven } from "react-icons/pi";
-import { IoCalendarNumberSharp } from 'react-icons/io5';
 
 const supportItems = [
   {
-    icon: <Box size={50} />,
+    icon: <RiBox3Line size={50} />,
     title: 'Express delivery',
     description: 'DHL express delivery worldwide from our bag company'
   },
   {
-    icon: <CreditCard size={50} />,
+    icon: <CgCreditCard size={50} />,
     title: 'Payment in 3x',
     description: 'Take advantage of a purchase with 3x without fees from $100 of purchase'
   },

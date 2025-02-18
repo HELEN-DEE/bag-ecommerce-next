@@ -2,9 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import headerImg from '../../public/luxury-bag.png'
 
-import { ArrowRight } from 'lucide-react';
-import { ArrowLeft } from 'lucide-react';
-import { ArrowDownRight } from 'lucide-react';
+import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2";
 
 const Header = () => {
   return (
@@ -24,14 +22,14 @@ const Header = () => {
                     </div>
                     <div className='w-[40%]'>
                         <div className='flex gap-2'>
-                                <ArrowDownRight size={25}/>
+                                <HiMiniArrowDownRight size={25}/>
                             <p>
                                 Discover the epitome of style and craftmanship without curated leather bag collection 
                             </p>
                         </div>
                         <button className='capitalize flex items-center gap-2 bg-white rounded-full px-5 py-2 border border-[#dad8d8] mt-4'>
                             Start shopping
-                            <ArrowRight size={18}/>
+                            <HiArrowRight size={18}/>
                         </button>
                     </div>
                 </div>
@@ -42,10 +40,10 @@ const Header = () => {
                     </div>
                     <button className='flex gap-2 mx-4'>
                         <div className='bg-[#e2e2e2] rounded-full p-3 border border-[#dad8d8]'>
-                            <ArrowLeft size={15} />
+                            <HiArrowLeft size={15} />
                         </div>
                         <div className='bg-white rounded-full p-3 border border-[#dad8d8]'>   
-                            <ArrowRight size={15} />
+                            <HiArrowRight size={15} />
                         </div>
                     </button>
                 </div>
