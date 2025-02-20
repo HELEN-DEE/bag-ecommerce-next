@@ -30,7 +30,7 @@ const Support = () => {
             </h1>
             <div className='flex justify-between gap-2'>
               {supportItems.map((item,index) =>(
-                <div key={index} className='text-center bg-[#F4F4F4] px-16 py-2 rounded-xl'>
+                <div key={index} className='text-center bg-[#F4F4F4] px-8 py-4 rounded-xl'>
                   <span className='flex justify-center'>
                     {item.icon}
                   </span>

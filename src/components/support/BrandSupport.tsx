@@ -1,13 +1,13 @@
 
 import Image from 'next/image'
-import nikeLogo from '../../public/nike-logo.png'
-import etsyLogo from '../../public/etsy-logo.png'
-import reebokLogo from '../../public/reebok-logo.png'
-import pumaLogo from '../../public/puma-logo.png'
-import asosLogo from '../../public/asos-logo.png'
-import ebayLogo from '../../public/ebay-logo.png'
-import zaraLogo from '../../public/zara-logo.png'
-import adidasLogo from '../../public/adidas-logo.png'
+import nikeLogo from '../../../public/nike-logo.png';
+import etsyLogo from '../../../public/etsy-logo.png';
+import reebokLogo from '../../../public/reebok-logo.png';
+import pumaLogo from '../../../public/puma-logo.png';
+import asosLogo from '../../../public/asos-logo.png';
+import ebayLogo from '../../../public/ebay-logo.png';
+import zaraLogo from '../../../public/zara-logo.png';
+import adidasLogo from '../../../public/adidas-logo.png';
 
 const logos = [
     {src: nikeLogo, alt: 'Nike Logo'},

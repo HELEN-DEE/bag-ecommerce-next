@@ -2,15 +2,17 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
+
 import { PiHandbag, PiHandbagBold } from "react-icons/pi";
 import { RiPokerHeartsLine } from "react-icons/ri";
+
 // images
-import bagImage1 from '../../public/bag-image-1.png'
-import bagImage2 from '../../public/bag-image-2.png'
-import bagImage3 from '../../public/bag-image-3.png'
-import bagImage4 from '../../public/bag-image-4.png'
-import bagImage5 from '../../public/bag-image-5.png'
-import bagImage6 from '../../public/bag-image-6.png'
+import bagImage1 from '../../../public/bag-image-1.png'
+import bagImage2 from '../../../public/bag-image-2.png'
+import bagImage3 from '../../../public/bag-image-3.png'
+import bagImage4 from '../../../public/bag-image-4.png'
+import bagImage5 from '../../../public/bag-image-5.png'
+import bagImage6 from '../../../public/bag-image-6.png'
 
 const radioOptions = [
     { name: 'All collection', value: 'all' },
