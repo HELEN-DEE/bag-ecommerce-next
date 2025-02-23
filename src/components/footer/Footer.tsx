@@ -16,9 +16,9 @@ const Footer = () => {
                         <HiArrowRight size={15} />
                     </button>
                 </span>
-                <span>
+                <span className='flex gap-2'>
                     <input type="radio" name="" id="" />
-                    <label htmlFor="">I have read and agree to teh bagstore privacy policy</label>
+                    <label htmlFor="">I have read and agree to the bagstore privacy policy</label>
                 </span>
             </div>
             <div>
