@@ -1,6 +1,17 @@
 import React from 'react'
+import Image from 'next/image'
 
 import { HiArrowRight } from "react-icons/hi2";
+
+import VisaLogo from '../../../public/Visa.svg'
+import MasterCardLogo from '../../../public/Mastercard.svg'
+import PayPalLogo from '../../../public/paypal.svg'
+
+const logoImage = [
+    {image: MasterCardLogo, alt: 'MasterCard Logo'},
+    {image: PayPalLogo, alt: 'PayPal Logo'},
+    {image: VisaLogo, alt: 'Visa Logo'},
+]
 
 const Footer = () => {
   return (
@@ -20,6 +31,13 @@ const Footer = () => {
                     <input type="radio" name="" id="" />
                     <label htmlFor="">I have read and agree to the bagstore privacy policy</label>
                 </span>
+                <div className='flex '>
+                    {logoImage.map((logo, index) => (
+                        <div key={index}>
+                            <Image src={logo.image} alt={logo.alt}  className='h-6'/>
+                        </div>
+                    ))}
+                </div>
             </div>
             <div>
 
