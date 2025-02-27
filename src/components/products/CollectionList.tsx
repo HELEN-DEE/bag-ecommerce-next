@@ -22,7 +22,8 @@ const Collection = [
 
 const CollectionList = () => {
   return (
-    <section className='mx-4'>
+    <section className='mx-4 my-8'>
+        <h1 className='text-3xl pb-4'>Collection List</h1>
         <div className='flex gap-2'>
             {Collection.map((collection, index) => (
                 <div key={index} className='relative my-4'>
