@@ -57,8 +57,8 @@ const Footer = () => {
                             <HiArrowRight size={20} />
                         </button>
                     </span>
-                    <span className='flex gap-2 pt-3'>
-                        <input type="radio" name="" id="" />
+                    <span className='flex gap-2 pt-3 items-center'>
+                        <input type="radio" name="" id="" className='w-5 h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black '/>
                         <label htmlFor="">I have read and agree to the bagstore privacy policy</label>
                     </span>
                     
@@ -99,7 +99,7 @@ const Footer = () => {
                         </div>
                     ))}
                 </div>
-                <div className='flex gap-2'>
+                <div className='flex gap-3'>
                     {appIcons.map((app, index) => (
                         <div key={index}>
                             <a href={app.link}>
@@ -107,15 +107,14 @@ const Footer = () => {
                             </a>
                         </div>
                     ))}
-                <div/>
+                </div>
                 <div>
-                    <button className='flex items-center gap-2 bg-[#ffffff] px-4 py-2 rounded-xl border border-gray-300'>
+                    <button className='flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400'>
                         Back to top
                         <HiArrowUp size={15} />
                     </button>
                 </div>
             </div>
-        </div>
         </div>
     </section>
   )
