@@ -7,7 +7,7 @@ import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2
 const Header = () => {
   return (
     <section className='bg-[#F4F4F4] mt-5 mx-4  rounded-xl h-[75vh] overflow-hidden relative '>
-            <div className='uppercase absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-0 text-[#e3e1e1] text-[210px] font-bold select-none pointer-events-none whitespace-nowrap'>
+            <div className='uppercase absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-0 text-[#e3e1e19c] text-[210px] font-bold select-none pointer-events-none whitespace-nowrap'>
                 <h1>Bagstore</h1>
             </div>
         <div className='relative '>

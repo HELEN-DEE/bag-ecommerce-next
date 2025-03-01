@@ -51,7 +51,7 @@ const BestSelling = () => {
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-2 '>
                 {bestBags.map((item, index) => (
-                    <div key={index} className='bg-[#F4F4F4] rounded-xl px-6 py-3'>
+                    <div key={index} className='bg-[#F4F4F4] rounded-2xl px-6 py-3'>
                         <div className='flex justify-between'>
                             <span>
                                 <h1 className='text-xl'>{item.title}</h1>
