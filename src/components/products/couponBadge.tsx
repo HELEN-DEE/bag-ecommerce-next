@@ -1,32 +1,25 @@
 import React from "react";
 
 const CouponBadge = () => {
-  const text = "* 20% Off Coupon - Bag20 * 20% Off Coupon - Bag20 *"; // Circular text
-  const chars = text.split(""); // Split text into individual characters
+
 
   return (
-    <div className="relative w-[120px] h-[120px] flex items-center justify-center">
-      {/* Outer Circle */}
-      <div className="absolute w-full h-full border border-gray-500 rounded-full"></div>
-
-      {/* Circular Text */}
-      {chars.map((char, index) => {
-        const angle = (360 / chars.length) * index; // Calculate rotation angle
-        return (
-          <span
-            key={index}
-            className="absolute text-[10px] text-gray-700 font-semibold"
-            style={{
-              transform: `rotate(${angle}deg) translate(55px) rotate(-${angle}deg)`,
-            }}
-          >
-            {char}
-          </span>
-        );
-      })}
-
-      {/* Center Icon (Star Shape) */}
-      <div className="absolute text-gray-700 text-xl">✦</div>
+    <div className="">
+        <svg className="w-32 h-32">
+            <path className="" 
+                id="curve" 
+                d="M 50, 62 m -35, 0 a 45,45 0 1,1 100,0 a 45,45 0 1,1 -100,0"
+                fill="none"
+                stroke="gray" 
+                strokeWidth={1}
+            ></path>
+            <text className=" text-[13px] fill-black">
+                <textPath href="#curve" textAnchor="middle" startOffset="50%">
+                    • 20% Off Coupon - Bag20 
+                    • 20% Off Coupon - Bag20 
+                </textPath>
+            </text>
+        </svg>
     </div>
   );
 };
