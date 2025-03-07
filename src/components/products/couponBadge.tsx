@@ -1,26 +1,37 @@
+"use client"
 import React from "react";
+
+import {motion} from 'framer-motion'
+import { PiStarFourFill } from "react-icons/pi";
 
 const CouponBadge = () => {
 
 
   return (
-    <div className="">
+    <motion.div 
+        className="flex relative justify-center items-center"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+    >
         <svg className="w-32 h-32">
+            <circle cx="64" cy="63" r="57" fill="none" stroke="gray" />
             <path className="" 
                 id="curve" 
-                d="M 50, 62 m -35, 0 a 45,45 0 1,1 100,0 a 45,45 0 1,1 -100,0"
+                d="M 53, 63 m -31, 0 a 34,34 0 1,1 84,0 a 34,34 0 1,1 -84,0"
                 fill="none"
-                stroke="gray" 
-                strokeWidth={1}
+                
             ></path>
-            <text className=" text-[13px] fill-black">
-                <textPath href="#curve" textAnchor="middle" startOffset="50%">
-                    • 20% Off Coupon - Bag20 
-                    • 20% Off Coupon - Bag20 
+            <text className="" fill="black" fontSize={10.4} >
+                <textPath href="#curve" startOffset="50%" textAnchor="middle">
+                • 20% off coupon - Bag20 • 20% off coupon - Bag20 
                 </textPath>
+            
             </text>
         </svg>
-    </div>
+            <div className="absolute text-gray-300 ">
+                <PiStarFourFill size={25}/>
+            </div>
+    </motion.div>
   );
 };
 
