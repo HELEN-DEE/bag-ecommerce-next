@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import brownBag from '../../../public/brown-bag.png';
 import blueBag from '../../../public/blue-bag.png';
