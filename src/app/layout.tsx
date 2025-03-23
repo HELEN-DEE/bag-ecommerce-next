@@ -3,7 +3,9 @@ import { Libre_Baskerville, Montserrat } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "../components/navigation/Navbar";
+import SearchBar from "../components/navigation/SearchBar";
 import Footer from "../components/footer/Footer";
+
 
 // Define fonts
 const libreBaskerville = Libre_Baskerville({
@@ -36,6 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${libreBaskerville.variable} ${montserrat.variable} antialiased`}
       >
         <Navbar />
+        <SearchBar />
         <main>{children}</main>
         <Footer />
       </body>

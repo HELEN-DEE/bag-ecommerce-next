@@ -1,5 +1,5 @@
 
-import SearchBar from "../components/navigation/SearchBar";
+
 import Header from "../components/hero/Header";
 import BrandSupport from "../components/support/BrandSupport";
 import Products from "../components/products/Products";
@@ -14,9 +14,7 @@ import CollectionList from "../components/products/CollectionList";
 export default function Home() {
   return (
     <>
-      {/* Navigation */}
-      
-      <SearchBar />
+    
 
       {/* Hero Section */}
       <Header />

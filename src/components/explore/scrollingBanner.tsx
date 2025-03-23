@@ -23,13 +23,13 @@ const scrollingText: ScrollingItem[] = [
 const ScrollingBanner: React.FC = () => {
   return (
     <section className='mx-4 my-8 rounded-xl'>
-      <div className='relative overflow-hidden bg-[#f4f4f4] py-4 rounded-xl'>
+      <div className='relative overflow-hidden bg-[#f4f4f4] py-4 rounded-xl '>
         {/* Right to left scrolling line */}
         <div className="flex whitespace-nowrap animate-scroll-left-slow">
           {Array(3).fill(scrollingText).flat().map((item, index) => (
-            <div key={`line1-${index}`} className='flex items-center mx-4'>
-              <Image src={item.img} alt="bag-img" className='w-12 h-auto'/>
-              <span className='uppercase text-2xl p-2 text-gray-400'>{item.text}</span>
+            <div key={`line1-${index}`} className='flex items-center mx-6'>
+              <Image src={item.img} alt="bag-img" className='w-20 h-auto'/>
+              <span className='uppercase text-5xl p-2 text-gray-400'>{item.text}</span>
             </div>
           ))}
         </div>
@@ -37,9 +37,9 @@ const ScrollingBanner: React.FC = () => {
         {/* Left to right scrolling line */}
         <div className="flex whitespace-nowrap animate-scroll-right-slow mt-4">
           {Array(3).fill(scrollingText).flat().map((item, index) => (
-            <div key={`line2-${index}`} className='flex items-center mx-4'>
-              <Image src={item.img} alt="bag-img" className='w-12 h-auto'/>
-              <span className='uppercase text-2xl p-2 text-gray-400'>{item.text}</span>
+            <div key={`line2-${index}`} className='flex items-center mx-6'>
+              <Image src={item.img} alt="bag-img" className='w-20 h-auto'/>
+              <span className='uppercase text-5xl p-2 text-gray-400'>{item.text}</span>
             </div>
           ))}
         </div>
