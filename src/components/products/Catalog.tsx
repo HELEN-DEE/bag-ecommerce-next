@@ -3,8 +3,8 @@ import { FaArrowRight } from "react-icons/fa6";
 import Image from 'next/image'
 import CouponBadge from './couponBadge'; 
 
-import bagImage1 from '../../../public/catalog-product-1.png';
-import bagImage2 from '../../../public/catalog-product-2.png';
+import bagImage1 from '../../../public/catalog-images/catalog-product-1.png';
+import bagImage2 from '../../../public/catalog-images/catalog-product-2.png';
 
 const Products = [
     {

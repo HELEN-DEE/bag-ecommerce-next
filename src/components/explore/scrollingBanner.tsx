@@ -1,8 +1,8 @@
 "use client";
 
 import Image, { StaticImageData } from 'next/image';
-import brownBag from '../../../public/brown-bag.png';
-import blueBag from '../../../public/blue-bag.png';
+import brownBag from '../../../public/banner-images/brown-bag.png';
+import blueBag from '../../../public/banner-images/blue-bag.png';
 
 interface ScrollingItem {
     img: StaticImageData;

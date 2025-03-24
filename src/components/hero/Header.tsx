@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import headerImg from '../../../public/luxury-bag.png'
+import headerImg from '../../../public/hero-image/luxury-bag.png'
 
 import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2";
 
@@ -12,8 +12,8 @@ const Header = () => {
             </div>
         <div className='relative '>
                 <div className='flex justify-between py-10'>
-                    <div className='text-5xl capitalize w-[60%] '>
-                        <h1 className='flex justify-center'>
+                    <div className='text-6xl capitalize w-[60%]'>
+                        <h1 className='flex justify-center '>
                             Best Leather bag 
                         </h1>
                         <h1 className='px-4'>
@@ -23,11 +23,11 @@ const Header = () => {
                     <div className='w-[40%]'>
                         <div className='flex gap-2'>
                                 <HiMiniArrowDownRight size={25}/>
-                            <p>
+                            <p className='text-xl'>
                                 Discover the epitome of style and craftmanship without curated leather bag collection 
                             </p>
                         </div>
-                        <button className='capitalize flex items-center gap-2 bg-white rounded-full px-5 py-2 border border-[#dad8d8] mt-4'>
+                        <button className='capitalize text-xl flex items-center gap-2 bg-white rounded-full px-5 py-2 border border-[#dad8d8] mt-4'>
                             Start shopping
                             <HiArrowRight size={15}/>
                         </button>

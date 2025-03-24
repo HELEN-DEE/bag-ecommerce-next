@@ -2,9 +2,9 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import bestbag1 from '../../../public/best-selling-bag-1.png'
-import bestbag2 from '../../../public/best-selling-bag-2.png'
-import bestbag3 from '../../../public/best-selling-bag-3.png'
+import bestbag1 from '../../../public/best-selling-images/best-selling-bag-1.png'
+import bestbag2 from '../../../public/best-selling-images/best-selling-bag-2.png'
+import bestbag3 from '../../../public/best-selling-images/best-selling-bag-3.png'
 
 import { PiHandbagBold } from "react-icons/pi";
 import { RiPokerHeartsLine } from "react-icons/ri";

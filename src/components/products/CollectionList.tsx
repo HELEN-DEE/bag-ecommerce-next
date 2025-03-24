@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 
-import collectionImg1 from '../../../public/collection-image-1.png'
-import collectionImg2 from '../../../public/collection-image-2.png'
-import collectionImg3 from '../../../public/collection-image-3.png'
+import collectionImg1 from '../../../public/collection-images/collection-image-1.png'
+import collectionImg2 from '../../../public/collection-images/collection-image-2.png'
+import collectionImg3 from '../../../public/collection-images/collection-image-3.png'
 
 const Collection = [
     {

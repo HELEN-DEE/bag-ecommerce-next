@@ -4,9 +4,9 @@ import Image from 'next/image'
 import { HiArrowRight, HiArrowUp } from "react-icons/hi2";
 
 
-import VisaLogo from '../../../public/Visa.png'
-import MasterCardLogo from '../../../public/Mastercard.png'
-import PayPalLogo from '../../../public/paypal.png'
+import VisaLogo from '../../../public/footer-images/Visa.png'
+import MasterCardLogo from '../../../public/footer-images/Mastercard.png'
+import PayPalLogo from '../../../public/footer-images/paypal.png'
 
 
 import { RiTwitterXFill, RiInstagramLine, RiLinkedinBoxLine } from "react-icons/ri";

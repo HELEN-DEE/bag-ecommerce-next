@@ -23,7 +23,7 @@ const SearchBar = () => {
         <div className='flex flex-col lg:flex-row lg:justify-between'>
           {buttonMain.map((item, index) => (
             <div key={index} className='flex gap-2 '>
-                <a href={item.path} className='bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-base rounded-2xl hover:text-white hover:bg-black'>
+                <a href={item.path} className='bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl hover:text-white hover:bg-black'>
                   {item.label}
                 </a>
             </div>
