@@ -1,56 +1,41 @@
-import React from 'react'
-
-import { FiSearch } from "react-icons/fi";
-import path from 'path';
+"use client";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const buttonMain = [
-  {label: 'Men', path: '/men'},
-  {label: 'Women', path: '/women'},
-  {label: 'Children', path: '/children'},
-  {label: 'Brand', path: '/brand'},
-  {label: 'New', path: '/new'},
-  {label: 'Popular', path: '/popular'},
-]
-
-const buttonSecondary = [
-  {label: 'About', path: '/about'},
-  {label: 'FAQs', path: '/faqs'},
-]
+  { label: "Men", type: "male" },
+  { label: "Women", type: "female" },
+  { label: "Children", type: "children" },
+  { label: "Brand", type: "brand" },
+  { label: "New", type: "new" },
+  { label: "Popular", type: "popular" },
+];
 
 const SearchBar = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentType = searchParams.get("type");
+
+  const handleFilter = (type: string) => {
+    const newUrl = type ? `/shop?type=${type}` : "/shop";
+    router.push(newUrl);
+  };
+
   return (
-    <section className='mx-4 '>
-        <div className='flex flex-col lg:flex-row lg:justify-between'>
-          {buttonMain.map((item, index) => (
-            <div key={index} className='flex gap-2 '>
-                <a href={item.path} className='bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl hover:text-white hover:bg-black'>
-                  {item.label}
-                </a>
-            </div>
-          ))}
-          
-
-          <div className='bg-[#F4F4F4] rounded-2xl flex items-center max-w-[460px] w-full '>
-            <input type="search" name="" id="search" placeholder='Search...' className=' px-3 py-2 flex-grow bg-transparent outline-none '/>
-            <div className='bg-white rounded-full p-2 inline-flex mx-2 hover:bg-black hover:text-white'>
-              <FiSearch className='' size={15}/>
-            </div>
-          </div>
-
-          {buttonSecondary.map((item, index) => (
-            <div key={index} className='flex gap-2 '>
-                <a href={item.path} className='bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-base rounded-2xl hover:text-white hover:bg-black'>
-                  {item.label}
-                  
-                </a>
-            </div>
-          ))}
-
-          
-
-        </div>
+    <section className="mx-4">
+      <div className="flex flex-col lg:flex-row lg:justify-between">
+        {buttonMain.map((item) => (
+          <button
+            key={item.type}
+            onClick={() => handleFilter(item.type)}
+            className={`bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl 
+              ${currentType === item.type ? "bg-black text-white" : ""}`}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
