@@ -4,8 +4,8 @@ import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const buttonMain = [
-  { label: "Men", type: "male" },
-  { label: "Women", type: "female" },
+  { label: "Men", type: "men" },
+  { label: "Women", type: "women" },
   { label: "Children", type: "children" },
   { label: "Brand", type: "brand" },
   { label: "New", type: "new" },

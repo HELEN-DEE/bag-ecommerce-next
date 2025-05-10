@@ -106,9 +106,9 @@ const products = [
 ];
 
 const Products = () => {
-    const [selectedOption, setSelectedOption] = useState('');
     const searchParams = useSearchParams();
     const type = searchParams.get("type");
+    const [selectedOption, setSelectedOption] = useState(type || '');
 
     // Filter products based on URL parameter or selected radio option
     const filteredProducts = type
