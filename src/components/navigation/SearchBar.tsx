@@ -2,6 +2,7 @@
 import { FiSearch } from "react-icons/fi";
 import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import {products} from "@/data/products"  
 
 const buttonMain = [
   { label: "Men", type: "men" },
@@ -18,14 +19,21 @@ const buttonSub = [
 ];
 
 const SearchBar = () => {
-  const router = useRouter();
+  
   const searchParams = useSearchParams();
+  const router = useRouter();
   const currentType = searchParams.get("type");
 
   const handleFilter = (type: string) => {
-    const newUrl = type ? `/shop?type=${type}` : "/shop";
-    router.push(newUrl);
+    const params = new URLSearchParams(searchParams.toString());
+    if (type === currentType) {
+      params.delete("type"); // Toggle off
+    } else {
+      params.set("type", type);
+    }
+    router.push(`/?${params.toString()}`);
   };
+
   return (
     <section className="mx-4">
       <div className="flex flex-col lg:flex-row lg:justify-between">
