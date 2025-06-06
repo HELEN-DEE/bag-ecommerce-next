@@ -52,7 +52,7 @@ const Products = () => {
                 type="radio"
                 name="productFilter"
                 value={option.value}
-                className="w-5 h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black checked:border-black"
+                className="w-5 h-5 appearance-none border-2 border-gray-400 rounded-full border-gray-400 checked:bg-black checked:border-black"
                 checked={selectedOption === option.value}
                 onChange={() => setSelectedOption(option.value)}
               />
