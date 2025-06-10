@@ -7,6 +7,14 @@ import { PiHandbag } from "react-icons/pi"
 import { RiPokerHeartsLine } from "react-icons/ri"
 import { products } from "@/data/products"
 
+type Product = {
+  id: string | number
+  title: string
+  price: string | number
+  image: string
+  category: string
+}
+
 const radioOptions = [
   { name: 'All collection', value: 'all' },
   { name: 'New collection', value: 'new' },
@@ -19,7 +27,7 @@ const Products = () => {
   const [selectedOption, setSelectedOption] = useState(currentType)
   const [cartItems, setCartItems] = useState<string[]>([])
   const [favorites, setFavorites] = useState<string[]>([])
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   useEffect(() => {
     setSelectedOption(currentType)
@@ -46,13 +54,13 @@ const Products = () => {
       <div>
         {/* Radio Buttons */}
         <div className='flex justify-between flex-wrap gap-4'>
-          {radioOptions.map((option, index) => (
-            <label key={index} className='flex gap-2 items-center cursor-pointer'>
+          {radioOptions.map((option) => (
+            <label key={option.value} className='flex gap-2 items-center cursor-pointer'>
               <input
                 type="radio"
                 name="productFilter"
                 value={option.value}
-                className="w-5 h-5 appearance-none border-2 border-gray-400 rounded-full border-gray-400 checked:bg-black checked:border-black"
+                className="w-5 h-5 appearance-none border-2 border-gray-400 rounded-full checked:bg-black checked:border-black"
                 checked={selectedOption === option.value}
                 onChange={() => setSelectedOption(option.value)}
               />
@@ -79,17 +87,17 @@ const Products = () => {
                 <div className="flex flex-row gap-2 z-20" onClick={e => e.stopPropagation()}>
                   <button
                     className='bg-white rounded-full w-8 h-8 flex items-center justify-center'
-                    onClick={() => toggleCart(product.id)}
+                    onClick={() => toggleCart(String(product.id))}
                     title="Add to Cart"
                   >
-                    <PiHandbag size={18} color={cartItems.includes(product.id) ? 'green' : 'black'} />
+                    <PiHandbag size={18} color={cartItems.includes(String(product.id)) ? 'green' : 'black'} />
                   </button>
                   <button
                     className='bg-white rounded-full w-8 h-8 flex items-center justify-center'
-                    onClick={() => toggleFavorite(product.id)}
+                    onClick={() => toggleFavorite(String(product.id))}
                     title="Favorite"
                   >
-                    <RiPokerHeartsLine size={18} color={favorites.includes(product.id) ? 'red' : 'black'} />
+                    <RiPokerHeartsLine size={18} color={favorites.includes(String(product.id)) ? 'red' : 'black'} />
                   </button>
                 </div>
               </div>
@@ -129,11 +137,11 @@ const Products = () => {
               <button
                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
                 onClick={() => {
-                  toggleCart(selectedProduct.id)
+                  toggleCart(String(selectedProduct.id))
                   setSelectedProduct(null)
                 }}
               >
-                {cartItems.includes(selectedProduct.id) ? "Remove from Cart" : "Add to Cart"}
+                {cartItems.includes(String(selectedProduct.id)) ? "Remove from Cart" : "Add to Cart"}
               </button>
             </div>
           </div>

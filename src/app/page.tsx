@@ -21,37 +21,34 @@ const Home = () => {
 const isFilterActive = Boolean(currentType)
 
  return (
-    <main className='flex flex-col gap-8'>
-      {/* If no filter, show all homepage content */}
-      {!isFilterActive && (
-        <>
-        
+   <main className='flex flex-col gap-8'>
+    {/* If no filter, show full homepage content */}
+    {!isFilterActive ? (
+      <>
+        {/* Hero Section */}
+        <Header />
 
-      {/* Hero Section */}
-      <Header />
+        {/* Brand & Product Sections */}
+        <BrandSupport />
+        <Products />
 
-      {/* Brand & Product Sections */}
-      <BrandSupport />
+        {/* Support & Exploration Sections */}
+        <Support />
+        <Explore />
+
+        {/* Highlights & Promotions */}
+        <ScrollingBanner />
+        <BestSelling />
+
+        {/* Catalog & Collections */}
+        <Catalog />
+        <CollectionList />
+      </>
+    ) : (
+      // If filter is active, show only filtered products
       <Products />
-
-      {/* Support & Exploration Sections */}
-      <Support />
-      <Explore />
-
-      {/* Highlights & Promotions */}
-      <ScrollingBanner />
-      <BestSelling />
-
-      {/* Catalog & Collections */}
-      <Catalog />
-      <CollectionList />
-
-    </>
-      )}
-   {/* Always render Products and Footer */}
-      <Products />
-      
-    </main>
+    )}
+  </main>
   )
 }
 
