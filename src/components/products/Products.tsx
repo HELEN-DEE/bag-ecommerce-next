@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { PiHandbag } from "react-icons/pi"
 import { RiPokerHeartsLine } from "react-icons/ri"
 import { products } from "@/data/products"
+import { useCart } from '@/components/context/cartContext' // ✅ Import your cart context
 
 type Product = {
   id: string | number
@@ -25,9 +26,10 @@ const Products = () => {
   const searchParams = useSearchParams()
   const currentType = searchParams.get("type") || "all"
   const [selectedOption, setSelectedOption] = useState(currentType)
-  const [cartItems, setCartItems] = useState<string[]>([])
   const [favorites, setFavorites] = useState<string[]>([])
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
+  const { cartItems, toggleCart } = useCart() // ✅ Use cart context
 
   useEffect(() => {
     setSelectedOption(currentType)
@@ -36,12 +38,6 @@ const Products = () => {
   const filteredProducts = selectedOption === 'all'
     ? products
     : products.filter(product => product.category === selectedOption)
-
-  const toggleCart = (id: string) => {
-    setCartItems(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    )
-  }
 
   const toggleFavorite = (id: string) => {
     setFavorites(prev =>
