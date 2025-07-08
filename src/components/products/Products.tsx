@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { PiHandbag } from "react-icons/pi"
+import { IoCartOutline } from "react-icons/io5";
 import { RiPokerHeartsLine } from "react-icons/ri"
 import { products } from "@/data/products"
 import { useCart } from '@/components/context/cartContext' // ✅ Import your cart context
@@ -86,7 +86,7 @@ const Products = () => {
                     onClick={() => toggleCart(String(product.id))}
                     title="Add to Cart"
                   >
-                    <PiHandbag size={18} color={cartItems.includes(String(product.id)) ? 'green' : 'black'} />
+                    <IoCartOutline size={18} color={cartItems.includes(String(product.id)) ? 'green' : 'black'} />
                   </button>
                   <button
                     className='bg-white rounded-full w-8 h-8 flex items-center justify-center'
