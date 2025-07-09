@@ -6,15 +6,8 @@ import { useSearchParams } from 'next/navigation'
 import { IoCartOutline } from "react-icons/io5";
 import { RiPokerHeartsLine } from "react-icons/ri"
 import { products } from "@/data/products"
-import { useCart } from '@/components/context/cartContext' // ✅ Import your cart context
-
-type Product = {
-  id: string | number
-  title: string
-  price: string | number
-  image: string
-  category: string
-}
+import { useCart } from '@/components/context/cartContext'
+import { useRouter } from "next/navigation";
 
 const radioOptions = [
   { name: 'All collection', value: 'all' },
@@ -27,22 +20,34 @@ const Products = () => {
   const currentType = searchParams.get("type") || "all"
   const [selectedOption, setSelectedOption] = useState(currentType)
   const [favorites, setFavorites] = useState<string[]>([])
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [visibleCount, setVisibleCount] = useState(6)
 
-  const { cartItems, toggleCart } = useCart() // ✅ Use cart context
+  const { cartItems, toggleCart } = useCart()
+  const router = useRouter()
 
   useEffect(() => {
     setSelectedOption(currentType)
+    setVisibleCount(6) // reset visible count on filter change
   }, [currentType])
 
   const filteredProducts = selectedOption === 'all'
     ? products
     : products.filter(product => product.category === selectedOption)
 
+  const visibleProducts = filteredProducts.slice(0, visibleCount)
+
   const toggleFavorite = (id: string) => {
     setFavorites(prev =>
       prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
     )
+  }
+
+  const handleShowMore = () => {
+    setVisibleCount(prev => Math.min(prev + 6, filteredProducts.length))
+  }
+
+  const handleShowLess = () => {
+    setVisibleCount(6)
   }
 
   return (
@@ -60,20 +65,18 @@ const Products = () => {
                 checked={selectedOption === option.value}
                 onChange={() => setSelectedOption(option.value)}
               />
-              <span className='text-lg'>
-                {option.name}
-              </span>
+              <span className='text-lg'>{option.name}</span>
             </label>
           ))}
         </div>
 
         {/* Product Cards */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 my-6'>
-          {filteredProducts.slice(0, 6).map((product) => (
+          {visibleProducts.map((product) => (
             <div
-              key={product.id}
+              key={String(product.id)} // ✅ Fix the key warning here
               className='bg-[#F4F4F4] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300'
-              onClick={() => setSelectedProduct(product)}
+              onClick={() => router.push(`/products/${product.id}`)}
             >
               <div className='flex justify-between mb-4'>
                 <span>
@@ -110,38 +113,25 @@ const Products = () => {
           ))}
         </div>
 
-        {/* Preview Modal */}
-        {selectedProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-xl w-[90%] max-w-lg relative">
-              <button
-                className="absolute top-2 right-2 text-xl"
-                onClick={() => setSelectedProduct(null)}
-              >
-                ✕
-              </button>
-              <h2 className="text-2xl font-bold mb-4">{selectedProduct.title}</h2>
-              <Image
-                src={selectedProduct.image}
-                alt={selectedProduct.title}
-                width={400}
-                height={400}
-                className='mx-auto mb-4 object-contain'
-              />
-              <p className="text-lg font-semibold mb-2">Price: {selectedProduct.price}</p>
-              <p className="text-sm text-gray-600 mb-4">Category: {selectedProduct.category}</p>
-              <button
-                className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-                onClick={() => {
-                  toggleCart(String(selectedProduct.id))
-                  setSelectedProduct(null)
-                }}
-              >
-                {cartItems.includes(String(selectedProduct.id)) ? "Remove from Cart" : "Add to Cart"}
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Control Buttons */}
+        <div className='text-center mt-6'>
+          {visibleCount < filteredProducts.length && (
+            <button
+              className='bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition-all mx-2'
+              onClick={handleShowMore}
+            >
+              Show More
+            </button>
+          )}
+          {visibleCount > 6 && (
+            <button
+              className='bg-gray-300 text-black px-6 py-3 rounded hover:bg-gray-400 transition-all mx-2'
+              onClick={handleShowLess}
+            >
+              Show Less
+            </button>
+          )}
+        </div>
       </div>
     </section>
   )

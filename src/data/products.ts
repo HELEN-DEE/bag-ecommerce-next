@@ -49,49 +49,5 @@ export const products = [
     { id: 39, title: 'Hobo small', price: '$185.00 USD', image: '/popular-images/popular-bag-img-3.png', category: 'popular' },
     { id: 40, title: 'Hobo small', price: '$195.00 USD', image: '/popular-images/popular-bag-img-4.png', category: 'popular' },
     { id: 41, title: 'Hobo small', price: '$199.00 USD', image: '/popular-images/popular-bag-img-5.png', category: 'popular' },
-    { id: 42, title: 'Hobo small', price: '$200.00 USD', image: '/popular-images/popular-bag-img-6.png', category: 'popular' },
-    // Men Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/men-images/male-bag-1.png', category: 'men' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/men-images/male-bag-2.png', category: 'men' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/men-images/male-bag-3.png', category: 'men' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/men-images/male-bag-4.png', category: 'men' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/men-images/male-bag-5.png', category: 'men' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/men-images/male-bag-6.png', category: 'men' },
-    // Women Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/women-images/female-bag-1.png', category: 'women' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/women-images/female-bag-2.png', category: 'women' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/women-images/female-bag-3.png', category: 'women' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/women-images/female-bag-5.png', category: 'women' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/women-images/female-bag-4.png', category: 'women' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/women-images/female-bag-6.png', category: 'women' },
-    // Children Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/children-images/children-bag-1.png', category: 'children' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/children-images/children-bag-2.png', category: 'children' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/children-images/children-bag-3.png', category: 'children' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/children-images/children-bag-5.png', category: 'children' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/children-images/children-bag-4.png', category: 'children' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/children-images/children-bag-6.png', category: 'children' },
-    // Brand Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/brand-images/brand-bag-3.png', category: 'brand' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/brand-images/brand-bag-2.png', category: 'brand' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/brand-images/brand-bag-5.png', category: 'brand' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/brand-images/brand-bag-1.png', category: 'brand' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/brand-images/brand-bag-6.png', category: 'brand' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/brand-images/brand-bag-4.png', category: 'brand' },
-    // New Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/new-images/new-bag-1.png', category: 'new' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/new-images/new-bag-2.png', category: 'new' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/new-images/new-bag-3.png', category: 'new' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/new-images/new-bag-4.png', category: 'new' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/new-images/new-bag-5.png', category: 'new' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/new-images/new-bag-6.png', category: 'new' },
-
-    // Popular Products
-    { title: 'Hobo small', price: '$195.00 USD', image: '/popular-images/popular-bag-img-1.png', category: 'popular' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/popular-images/popular-bag-img-2.png', category: 'popular' },
-    { title: 'Hobo small', price: '$185.00 USD', image: '/popular-images/popular-bag-img-3.png', category: 'popular' },
-    { title: 'Hobo small', price: '$195.00 USD', image: '/popular-images/popular-bag-img-4.png', category: 'popular' },
-    { title: 'Hobo small', price: '$199.00 USD', image: '/popular-images/popular-bag-img-5.png', category: 'popular' },
-    { title: 'Hobo small', price: '$200.00 USD', image: '/popular-images/popular-bag-img-6.png', category: 'popular' },
-];
-
+        { id: 42, title: 'Hobo small', price: '$200.00 USD', image: '/popular-images/popular-bag-img-6.png', category: 'popular' }
+    ];
