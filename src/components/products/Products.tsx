@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5"
 import { RiPokerHeartsLine } from "react-icons/ri"
-import { products } from "@/data/products"
+import { products } from "@/data/products" // ✅ only this
 import { useCart } from '@/components/context/cartContext'
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
 
 const radioOptions = [
   { name: 'All collection', value: 'all' },
@@ -27,7 +27,7 @@ const Products = () => {
 
   useEffect(() => {
     setSelectedOption(currentType)
-    setVisibleCount(6) // reset visible count on filter change
+    setVisibleCount(6) // reset count on filter change
   }, [currentType])
 
   const filteredProducts = selectedOption === 'all'
@@ -53,7 +53,7 @@ const Products = () => {
   return (
     <section className='mx-4'>
       <div>
-        {/* Radio Buttons */}
+        {/* Filter Buttons */}
         <div className='flex justify-between flex-wrap gap-4'>
           {radioOptions.map((option) => (
             <label key={option.value} className='flex gap-2 items-center cursor-pointer'>
@@ -74,7 +74,7 @@ const Products = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 my-6'>
           {visibleProducts.map((product) => (
             <div
-              key={String(product.id)} // ✅ Fix the key warning here
+              key={String(product.id)} // ✅ ensures unique keys
               className='bg-[#F4F4F4] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300'
               onClick={() => router.push(`/products/${product.id}`)}
             >
@@ -113,7 +113,7 @@ const Products = () => {
           ))}
         </div>
 
-        {/* Control Buttons */}
+        {/* Show More / Show Less Buttons */}
         <div className='text-center mt-6'>
           {visibleCount < filteredProducts.length && (
             <button

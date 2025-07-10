@@ -49,5 +49,27 @@ export const products = [
     { id: 39, title: 'Hobo small', price: '$185.00 USD', image: '/popular-images/popular-bag-img-3.png', category: 'popular' },
     { id: 40, title: 'Hobo small', price: '$195.00 USD', image: '/popular-images/popular-bag-img-4.png', category: 'popular' },
     { id: 41, title: 'Hobo small', price: '$199.00 USD', image: '/popular-images/popular-bag-img-5.png', category: 'popular' },
-        { id: 42, title: 'Hobo small', price: '$200.00 USD', image: '/popular-images/popular-bag-img-6.png', category: 'popular' }
-    ];
+    { id: 42, title: 'Hobo small', price: '$200.00 USD', image: '/popular-images/popular-bag-img-6.png', category: 'popular' },
+    // Best Selling Bags
+{
+    id: 43,
+    title: 'Hobo small',
+    price: '$195.00 USD',
+    image: '/best-selling-images/best-selling-bag-1.png',
+    category: 'best',
+},
+{
+    id: 44,
+    title: 'Hobo small',
+    price: '$195.00 USD',
+    image: '/best-selling-images/best-selling-bag-2.png',
+    category: 'best',
+},
+{
+    id: 45,
+    title: 'Hobo small',
+    price: '$195.00 USD',
+    image: '/best-selling-images/best-selling-bag-3.png',
+    category: 'best',
+},
+];
