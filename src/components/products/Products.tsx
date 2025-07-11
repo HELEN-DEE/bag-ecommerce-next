@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { IoCartOutline } from "react-icons/io5"
 import { RiPokerHeartsLine } from "react-icons/ri"
-import { products } from "@/data/products" // ✅ only this
+import { IoMdCheckmark } from "react-icons/io"
+import { products } from "@/data/products"
 import { useCart } from '@/components/context/cartContext'
 import { useRouter } from "next/navigation"
 
@@ -27,7 +28,7 @@ const Products = () => {
 
   useEffect(() => {
     setSelectedOption(currentType)
-    setVisibleCount(6) // reset count on filter change
+    setVisibleCount(6)
   }, [currentType])
 
   const filteredProducts = selectedOption === 'all'
@@ -74,7 +75,7 @@ const Products = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 my-6'>
           {visibleProducts.map((product) => (
             <div
-              key={String(product.id)} // ✅ ensures unique keys
+              key={String(product.id)}
               className='bg-[#F4F4F4] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300'
               onClick={() => router.push(`/products/${product.id}`)}
             >
@@ -85,12 +86,18 @@ const Products = () => {
                 </span>
                 <div className="flex flex-row gap-2 z-20" onClick={e => e.stopPropagation()}>
                   <button
-                    className='bg-white rounded-full w-8 h-8 flex items-center justify-center'
+                    className='bg-white rounded-full w-8 h-8 flex items-center justify-center relative'
                     onClick={() => toggleCart(String(product.id))}
                     title="Add to Cart"
                   >
                     <IoCartOutline size={18} color={cartItems.includes(String(product.id)) ? 'green' : 'black'} />
+                    {cartItems.includes(String(product.id)) && (
+                      <span className='absolute -top-1 -right-1 bg-green-500 text-white rounded-full px-0.5 py-0.5'>
+                        <IoMdCheckmark size={10} />
+                      </span>
+                    )}
                   </button>
+
                   <button
                     className='bg-white rounded-full w-8 h-8 flex items-center justify-center'
                     onClick={() => toggleFavorite(String(product.id))}

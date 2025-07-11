@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { PiHandbagBold } from 'react-icons/pi'
 import { RiPokerHeartsLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
+import { IoMdCheckmark } from "react-icons/io";
 
 import bestbag1 from '../../../public/best-selling-images/best-selling-bag-1.png'
 import bestbag2 from '../../../public/best-selling-images/best-selling-bag-2.png'
@@ -73,8 +74,8 @@ const BestSelling = () => {
                   >
                     <PiHandbagBold size={18} color={cartItems.includes(String(item.id)) ? 'green' : 'black'} />
                     {cartItems.includes(String(item.id)) && (
-                        <span className='absolute -top-1 -right-1 bg-green-500 text-white text-[10px] rounded-full px-1'>
-                            ✓
+                        <span className='absolute -top-1 -right-1 bg-green-500 text-white  rounded-full px-0.5 py-0.5'>
+                            <IoMdCheckmark size={10} />
                         </span>
                     )}
                   </button>
