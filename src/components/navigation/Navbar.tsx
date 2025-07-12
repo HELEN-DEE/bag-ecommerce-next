@@ -1,19 +1,22 @@
 'use client'
 
-import React from 'react';
-import { useCart } from '../context/cartContext'; // 👈 import context
-import { SlMenu } from "react-icons/sl";
-import { PiHandbagBold } from "react-icons/pi";
-import { RiPokerHeartsLine } from "react-icons/ri";
-import { MdOutlinePerson } from "react-icons/md";
-import { IoCartOutline } from "react-icons/io5";
+import React from 'react'
+import { useCart } from '../context/cartContext'
+import { SlMenu } from "react-icons/sl"
+import { PiHandbagBold } from "react-icons/pi"
+import { RiPokerHeartsLine } from "react-icons/ri"
+import { MdOutlinePerson } from "react-icons/md"
+import { IoCartOutline } from "react-icons/io5"
+import Link from 'next/link'
+import { useAuth } from '../context/authContext'
 
 const Navbar = () => {
-  const { cartItems } = useCart(); // 👈 use cart count
+  const { cartItems } = useCart()
+  const { user, logout } = useAuth()
 
   return (
     <section className='mx-4 my-5'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center'>
         <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
           <SlMenu size={15} />
         </div>
@@ -23,7 +26,7 @@ const Navbar = () => {
           <h1 className='text-lg font-bold'>Bagstore</h1>
         </div>
 
-        <div className='flex gap-3 relative'>
+        <div className='flex gap-3 items-center relative'>
           <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
             <RiPokerHeartsLine size={15} />
           </div>
@@ -37,13 +40,26 @@ const Navbar = () => {
               </span>
             )}
           </div>
-          <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
-            <MdOutlinePerson size={15} />
-          </div>
+
+          <Link href="/auth">
+            <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
+              <MdOutlinePerson size={15} />
+            </div>
+          </Link>
+
+          {/* Welcome Message */}
+          {user && (
+            <div className='text-sm ml-2'>
+              Welcome, <span className='font-semibold'>{user.name || 'User'}</span>!
+              <button className='text-red-500 ml-2' onClick={logout}>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
