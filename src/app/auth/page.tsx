@@ -27,8 +27,8 @@ const AuthPage = () => {
 }
 
 return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white shadow-md p-6 rounded-md w-full max-w-md">
+    <div className="flex justify-center mt-10">
+        <div className="bg-gray-100 shadow-md p-6 rounded-md w-full max-w-md">
             {/* Tabs */}
             <div className="flex justify-between mb-4 border-b">
                 <button
