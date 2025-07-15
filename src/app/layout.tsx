@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Montserrat } from "next/font/google";
 import "./globals.css";
+import { ReactNode } from "react";
 
+// Context Providers
 import { CartProvider } from "../components/context/cartContext";
-import { LayoutWrapper } from "../components/layout/layoutWrapper"; // ✅ NEW
+import { AuthProvider } from '../components/context/authContext'
+import { LayoutWrapper } from "../components/layout/layoutWrapper";
 
 const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
@@ -23,17 +26,17 @@ export const metadata: Metadata = {
   description: "A modern e-commerce store for bags",
 };
 
-import { ReactNode } from "react";
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={`${libreBaskerville.variable} ${montserrat.variable} antialiased`}>
-        <CartProvider>
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <LayoutWrapper>
+              {children}
+            </LayoutWrapper>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

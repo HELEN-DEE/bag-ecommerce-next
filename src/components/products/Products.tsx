@@ -52,10 +52,10 @@ const Products = () => {
   }
 
   return (
-    <section className='mx-4'>
+    <section className='mx-4 '>
       <div>
         {/* Filter Buttons */}
-        <div className='flex justify-between flex-wrap gap-4'>
+        <div className='flex justify-between flex-wrap gap-4 mt-5'>
           {radioOptions.map((option) => (
             <label key={option.value} className='flex gap-2 items-center cursor-pointer'>
               <input
