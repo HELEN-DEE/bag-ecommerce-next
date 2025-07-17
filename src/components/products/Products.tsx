@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -19,21 +18,27 @@ const radioOptions = [
 const Products = () => {
   const searchParams = useSearchParams()
   const currentType = searchParams.get("type") || "all"
-  const [selectedOption, setSelectedOption] = useState(currentType)
+  const searchQuery = searchParams.get("search") || ""
+  const [selectedOption, setSelectedOption] = useState("all")
   const [favorites, setFavorites] = useState<string[]>([])
   const [visibleCount, setVisibleCount] = useState(6)
 
   const { cartItems, toggleCart } = useCart()
   const router = useRouter()
 
+  // Fixed useEffect with consistent dependencies
   useEffect(() => {
-    setSelectedOption(currentType)
-    setVisibleCount(6)
-  }, [currentType])
+    setSelectedOption(currentType);
+    setVisibleCount(6);
+  }, [currentType]); // Only currentType as dependency
 
-  const filteredProducts = selectedOption === 'all'
+  const filteredProducts = (selectedOption === 'all'
     ? products
     : products.filter(product => product.category === selectedOption)
+  ).filter(product => 
+    searchQuery === "" || 
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   const visibleProducts = filteredProducts.slice(0, visibleCount)
 

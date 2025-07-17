@@ -18,10 +18,11 @@ const Home = () => {
   const searchParams = useSearchParams()
   const currentType = searchParams.get('type')
 
-const isFilterActive = Boolean(currentType)
+const searchQuery = searchParams.get('search')
+const isFilterActive = Boolean(currentType || searchQuery)
 
- return (
-   <main className='flex flex-col gap-8'>
+return (
+  <main className='flex flex-col gap-8'>
     {/* If no filter, show full homepage content */}
     {!isFilterActive ? (
       <>
