@@ -3,6 +3,8 @@ import {useState} from "react";
 import { FiSearch } from "react-icons/fi";
 import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
+
 // import {products} from "@/data/products"  
 
 const buttonMain = [
@@ -15,8 +17,8 @@ const buttonMain = [
 ];
 
 const buttonSub = [
-  {label: "About", type: "about"},
-  {label: "FAQs", type: "faqs"},
+  {label: "About", type: "about", link: "/about"},
+  {label: "FAQs", type: "faqs", link: "/faqs"},
 ];
 
 const SearchBar = () => {
@@ -78,13 +80,11 @@ const SearchBar = () => {
         </div>
       <div className=" lg:flex gap-4">
         {buttonSub.map((item) => (
-          <button
-            key={item.type}
-            // onClick={() => handleFilter(item.type)}
-            className={`bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl`}
-          >
-            {item.label}
-          </button>
+          <Link key={item.type} href={item.link}>
+            <button className="bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl hover:bg-gray-300 transition-colors">
+              {item.label}
+            </button>
+          </Link>
         ))}
       </div>
       </div>

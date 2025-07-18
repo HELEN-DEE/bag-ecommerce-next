@@ -8,6 +8,8 @@ import { CartProvider } from "../components/context/cartContext";
 import { AuthProvider } from '../components/context/authContext'
 import { LayoutWrapper } from "../components/layout/layoutWrapper";
 
+import { Toaster } from 'sonner'
+
 const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
   subsets: ["latin"],
@@ -33,6 +35,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AuthProvider>
           <CartProvider>
             <LayoutWrapper>
+              <Toaster
+                theme="dark"
+                position="top-right"
+                richColors/>
               {children}
             </LayoutWrapper>
           </CartProvider>

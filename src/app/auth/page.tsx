@@ -4,9 +4,11 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/context/authContext'
 
+import { toast } from 'sonner'
+
 const AuthPage = () => {
   const router = useRouter()
-  const { user, login } = useAuth()
+  const { login } = useAuth()
 
   const [tab, setTab] = useState<'signin' | 'signup'>('signin')
   const [name, setName] = useState('')
@@ -15,29 +17,39 @@ const AuthPage = () => {
   const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null) // Reset error on new submission
+  e.preventDefault();
+  setError(null);
 
-    // Basic validation
-    if (!email || !password) {
-      setError('Email and password are required')
-      return
-    }
-
-    if (tab === 'signup' && !name) {
-      setError('Name is required for sign up')
-      return
-    }
-
-    // For demo purposes - in a real app, you would call your API here
-    const userData = { 
-      name: tab === 'signup' ? name : email.split('@')[0], // Use email prefix if name not provided
-      email 
-    }
-    
-    login(userData)
-    router.push('/')
+  if (!email || !password) {
+    setError("Email and password are required");
+    return;
   }
+
+  if (tab === "signup" && !name) {
+    setError("Name is required for sign up");
+    return;
+  }
+
+  const userData = {
+    name: tab === "signup" ? name : email.split("@")[0],
+    email,
+  };
+
+  login(userData); // ⬅️ your context method
+
+  // Show a Sonner toast
+  if (tab === "signup") {
+    toast.success(`Account created successfully! 🎉`);
+  } else {
+    toast.success(`Welcome back, ${userData.name}! 👋`);
+  }
+
+  // Slight delay before redirecting so toast shows clearly
+  setTimeout(() => {
+    router.push("/");
+  }, 1000);
+};
+
 
   return (
     <div className="flex justify-center mt-10">
