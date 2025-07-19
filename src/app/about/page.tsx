@@ -16,7 +16,7 @@ const AboutPage = () => {
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Your premier destination for premium bags, accessories, and lifestyle essentials. 
-              We believe that the right bag doesn't just carry your belongings—it carries your story.
+              We believe that the right bag doesn&#39;t just carry your belongings—it carries your story.
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ const AboutPage = () => {
               from elegant handbags to functional travel gear—we have something for every occasion.
             </p>
             <p className="text-gray-700">
-              Our commitment goes beyond just selling bags. We're dedicated to sustainable practices, 
+              Our commitment goes beyond just selling bags. We&#39;re dedicated to sustainable practices, 
               ethical sourcing, and building lasting relationships with our customers.
             </p>
           </div>
@@ -99,7 +99,7 @@ const AboutPage = () => {
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
           <p className="text-lg mb-8 max-w-4xl mx-auto">
             To empower individuals through thoughtfully designed bags that enhance their daily lives. 
-            We believe that functionality and style should never be compromised, and we're committed 
+            We believe that functionality and style should never be compromised, and we&#39;re committed 
             to sustainable practices that respect our planet.
           </p>
           <Link href="/" className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors inline-block">
@@ -113,7 +113,7 @@ const AboutPage = () => {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
           <p className="text-gray-700 mb-8">
-            Have questions about our products or need help with your order? We're here to help!
+            Have questions about our products or need help with your order? We&#39;re here to help!
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link href="/contact" className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">

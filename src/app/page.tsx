@@ -1,6 +1,5 @@
 'use client'
 import React from 'react';
-
 import { useSearchParams } from 'next/navigation'
 
 import Header from "../components/hero/Header";
@@ -13,43 +12,57 @@ import BestSelling from "../components/products/BestSelling";
 import Catalog from "../components/products/Catalog";
 import CollectionList from "../components/products/CollectionList";
 
-
 const Home = () => {
   const searchParams = useSearchParams()
   const currentType = searchParams.get('type')
+  const searchQuery = searchParams.get('search')
+  const isFilterActive = Boolean(currentType || searchQuery)
 
-const searchQuery = searchParams.get('search')
-const isFilterActive = Boolean(currentType || searchQuery)
+  return (
+    <main className='flex flex-col gap-8'>
+      {/* If no filter, show full homepage content */}
+      {!isFilterActive ? (
+        <>
+          {/* Hero Section */}
+          <section id="hero">
+            <Header />
+          </section>
 
-return (
-  <main className='flex flex-col gap-8'>
-    {/* If no filter, show full homepage content */}
-    {!isFilterActive ? (
-      <>
-        {/* Hero Section */}
-        <Header />
+          {/* Brand & Product Sections */}
+          <BrandSupport />
+          
+          <section id="products">
+            <Products />
+          </section>
 
-        {/* Brand & Product Sections */}
-        <BrandSupport />
+          {/* Support & Exploration Sections */}
+          <section id="support">
+            <Support />
+          </section>
+          
+          <Explore />
+
+          {/* Highlights & Promotions */}
+          <ScrollingBanner />
+          
+          <section id="bestselling">
+            <BestSelling />
+          </section>
+
+          {/* Catalog & Collections */}
+          <section id="catalog">
+            <Catalog />
+          </section>
+          
+          <section id="collections">
+            <CollectionList />
+          </section>
+        </>
+      ) : (
+        // If filter is active, show only filtered products
         <Products />
-
-        {/* Support & Exploration Sections */}
-        <Support />
-        <Explore />
-
-        {/* Highlights & Promotions */}
-        <ScrollingBanner />
-        <BestSelling />
-
-        {/* Catalog & Collections */}
-        <Catalog />
-        <CollectionList />
-      </>
-    ) : (
-      // If filter is active, show only filtered products
-      <Products />
-    )}
-  </main>
+      )}
+    </main>
   )
 }
 
