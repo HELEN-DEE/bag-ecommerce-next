@@ -179,16 +179,18 @@ const Navbar = () => {
               <RiPokerHeartsLine size={15} />
             </div>
             
-            <div className='relative'>
-              <div className='border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-gray-300'>
+          <Link href="/checkout">
+            <div className="relative">
+              <div className="border rounded-full border-gray-500 p-2 inline-flex hover:bg-black hover:text-white">
                 <IoCartOutline size={15} />
               </div>
-              {cartItems && cartItems.length > 0 && (
-                <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full'>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                   {cartItems.length}
                 </span>
               )}
             </div>
+          </Link>
 
             {/* User Avatar with Dropdown */}
             <div className='relative' ref={dropdownRef}>
