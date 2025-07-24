@@ -87,7 +87,9 @@ const Products = () => {
               <div className='flex justify-between mb-4'>
                 <span>
                   <h1 className='text-xl'>{product.title}</h1>
-                  <p className='font-bold'>{product.price}</p>
+                  <p className='font-bold'>
+                    ${product.price.replace('$', '').replace('USD', '').trim()}
+                  </p>
                 </span>
                 <div className="flex flex-row gap-2 z-20" onClick={e => e.stopPropagation()}>
                   <button
