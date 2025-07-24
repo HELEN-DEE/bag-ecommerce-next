@@ -50,24 +50,24 @@ const Navbar = () => {
     return name.split(' ').map((word: string) => word[0]).join('').toUpperCase().slice(0, 2)
   }
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-    setIsMenuOpen(false)
-  }
+  // const scrollToSection = (sectionId: string) => {
+  //   const element = document.getElementById(sectionId)
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' })
+  //   }
+  //   setIsMenuOpen(false)
+  // }
 
   const menuItems = [
-    { id: 'hero', label: 'Home', icon: FiHome },
-    { id: 'products', label: 'Products', icon: FiShoppingBag },
-    { id: 'bestselling', label: 'Best Selling', icon: FiStar },
-    { id: 'catalog', label: 'Catalog', icon: FiGrid },
-    { id: 'collections', label: 'Collections', icon: FiLayers },
-    { id: 'support', label: 'Support', icon: FiHeart },
+    { id: 'hero', label: 'Home', icon: FiHome, path: "/home" },
+    { id: 'products', label: 'Products', icon: FiShoppingBag, path: "/products" },
+    { id: 'bestselling', label: 'Best Selling', icon: FiStar, path: "/bestselling" },
+    { id: 'catalog', label: 'Catalog', icon: FiGrid, path: "/catalog" },
+    { id: 'collections', label: 'Collections', icon: FiLayers, path: "/collections" },
+    { id: 'support', label: 'Support', icon: FiHeart, path: "/support" },
   ]
 
-  // Don't render interactive elements until mounted to avoid hydration mismatch
+  
   if (!isMounted) {
     return (
       <section className='mx-4 my-5'>
@@ -131,14 +131,15 @@ const Navbar = () => {
                 {menuItems.map((item) => {
                   const IconComponent = item.icon
                   return (
-                    <button
+                    <Link
                       key={item.id}
-                      onClick={() => scrollToSection(item.id)}
+                      href={`/#${item.id}`}
+                      onClick={() => setIsMenuOpen(false)}
                       className='w-full flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-black transition-colors'
                     >
                       <IconComponent className='mr-3' size={18} />
                       <span className='font-medium'>{item.label}</span>
-                    </button>
+                    </Link>
                   )
                 })}
 
