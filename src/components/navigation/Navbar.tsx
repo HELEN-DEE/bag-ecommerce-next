@@ -70,7 +70,7 @@ const Navbar = () => {
   
   if (!isMounted) {
     return (
-      <section className='mx-4 my-5'>
+      <section className='mx-4 my-5 '>
         <div className='flex justify-between items-center'>
           <div className='border rounded-full border-gray-500 p-2 inline-flex'>
             <SlMenu size={15} />

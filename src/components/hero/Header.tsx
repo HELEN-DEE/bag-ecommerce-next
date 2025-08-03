@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import headerImg from '../../../public/hero-image/luxury-bag.png'
 
+// import Link from 'next/link'
+
 import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2";
 
 const Header = () => {
@@ -27,10 +29,14 @@ const Header = () => {
                                 Discover the epitome of style and craftmanship without curated leather bag collection 
                             </p>
                         </div>
-                        <button className='capitalize text-xl flex items-center gap-2 bg-white rounded-full px-5 py-2 border border-[#dad8d8] mt-4'>
-                            Start shopping
-                            <HiArrowRight size={15}/>
-                        </button>
+                        
+                        {/* Bug issue */}
+                            <button className='capitalize text-xl flex items-center gap-2 bg-white  rounded-full px-5 py-2 border border-[#dad8d8] mt-4 hover:text-white hover:bg-black transition-colors'>
+                                Start shopping
+                                <HiArrowRight size={15}/>
+                            </button>
+                    
+                        
                     </div>
                 </div>
                 <div className='flex justify-between'>
@@ -42,7 +48,7 @@ const Header = () => {
                         <div className='bg-[#e2e2e2] rounded-full p-3 w-10 h-10  border border-[#dad8d8]'>
                             <HiArrowLeft size={15} />
                         </div>
-                        <div className='bg-white rounded-full p-3 w-10 h-10 border border-[#dad8d8]'>   
+                        <div className='bg-white rounded-full p-3 w-10 h-10 border border-[#dad8d8] '>   
                             <HiArrowRight size={15} />
                         </div>
                     </button>

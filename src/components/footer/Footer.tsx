@@ -1,3 +1,7 @@
+"use client"
+
+import { useSearchParams, useRouter } from 'next/navigation';
+
 import React from 'react'
 import Image from 'next/image'
 
@@ -10,7 +14,7 @@ import PayPalLogo from '../../../public/footer-images/paypal.png'
 
 
 import { RiTwitterXFill, RiInstagramLine, RiLinkedinBoxLine } from "react-icons/ri";
-import { TbBrandLinkedin } from "react-icons/tb";
+
 
 const menuLinks = [
     {name: 'Men', link: '/men'},
@@ -23,7 +27,7 @@ const menuLinks = [
 
 const supportlinks = [
     {name: 'Shipping & Returns', link: '/shipping-returns'},
-    {name: 'FAQs', link: '/faq'},
+    {name: 'FAQs', link: '/faqs'},
     {name: 'Help & Conditions', link: '/help-conditions'},
     {name: 'About', link: '/about'},
     {name: 'Contact', link: '/contact'},
@@ -43,7 +47,20 @@ const appIcons = [
 ]
 
 const Footer = () => {
-  return (
+    const searchParams = useSearchParams();
+const router = useRouter();
+const currentType = searchParams.get("type");
+
+const handleFilter = (type: string) => {
+const params = new URLSearchParams(searchParams.toString());
+    if (type === currentType) {
+    params.delete("type");
+    } else {
+    params.set("type", type);
+    }
+    router.push(`/?${params.toString()}`);
+};
+return (
     <section className='mx-4 my-8 bg-[#F4F4F4] rounded-2xl'>
         <div className='p-6'>
             <div className='flex '>
@@ -71,7 +88,12 @@ const Footer = () => {
                         <ul>
                             {menuLinks.map((menu, index) => (
                                 <li key={index}>
-                                    <a href={menu.link}>{menu.name}</a>
+                                    <button
+                                    onClick={() => handleFilter(menu.name.toLowerCase())}
+                                    className="hover:underline text-left"
+                                    >
+                                    {menu.name}
+                                    </button>
                                 </li>
                             ))}
                         </ul>   
@@ -109,7 +131,7 @@ const Footer = () => {
                     ))}
                 </div>
                 <div>
-                    <button className='flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400'>
+                    <button className='flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors'>
                         Back to top
                         <HiArrowUp size={15} />
                     </button>

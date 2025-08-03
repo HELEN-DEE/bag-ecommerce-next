@@ -56,7 +56,7 @@ const SearchBar = () => {
           <button
             key={item.type}
             onClick={() => handleFilter(item.type)}
-            className={`bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl 
+            className={`bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg hover:bg-black hover:text-white rounded-2xl 
               ${currentType === item.type ? "bg-black text-white" : ""}`}
           >
             {item.label}
@@ -81,7 +81,7 @@ const SearchBar = () => {
       <div className=" lg:flex gap-4">
         {buttonSub.map((item) => (
           <Link key={item.type} href={item.link}>
-            <button className="bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl hover:bg-gray-300 transition-colors">
+            <button className="bg-[#F4F4F4] md:px-4 md:py-2 px-3 py-2 text-[12px] md:text-lg rounded-2xl hover:bg-black hover:text-white transition-colors">
               {item.label}
             </button>
           </Link>
