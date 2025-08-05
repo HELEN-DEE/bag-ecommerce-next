@@ -30,8 +30,7 @@ const Header = () => {
                             </p>
                         </div>
                         
-                        {/* Bug issue */}
-                            <button className='capitalize text-xl flex items-center gap-2 bg-white  rounded-full px-5 py-2 border border-[#dad8d8] mt-4 hover:text-white hover:bg-black transition-colors'>
+                            <button className='capitalize text-xl flex items-center gap-2 bg-white  rounded-full px-5 py-2 border border-[#dad8d8] mt-4 hover:text-white hover:!bg-black'>
                                 Start shopping
                                 <HiArrowRight size={15}/>
                             </button>
@@ -45,15 +44,15 @@ const Header = () => {
                         <p>Present</p>
                     </div>
                     <button className='flex gap-2 mx-4'>
-                        <div className='bg-[#e2e2e2] rounded-full p-3 w-10 h-10  border border-[#dad8d8]'>
+                        <div className='bg-[#e2e2e2] rounded-full p-3 w-10 h-10  border border-[#dad8d8] hover:bg-black hover:text-white'>
                             <HiArrowLeft size={15} />
                         </div>
-                        <div className='bg-white rounded-full p-3 w-10 h-10 border border-[#dad8d8] '>   
+                        <div className='bg-white rounded-full p-3 w-10 h-10 border border-[#dad8d8] hover:bg-black hover:text-white'>   
                             <HiArrowRight size={15} />
                         </div>
                     </button>
                 </div>
-            <div className='absolute top-0 left-0 right-0 flex justify-center '>
+            <div className='absolute top-0 left-0 right-0 flex justify-center pointer-events-none'>
                 <Image src= {headerImg} alt="Luxury Bag" className='w-[440px]' />
             </div>
         </div>
