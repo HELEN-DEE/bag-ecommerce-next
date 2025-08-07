@@ -48,98 +48,110 @@ const appIcons = [
 
 const Footer = () => {
     const searchParams = useSearchParams();
-const router = useRouter();
-const currentType = searchParams.get("type");
+    const router = useRouter();
+    const currentType = searchParams.get("type");
 
-const handleFilter = (type: string) => {
-const params = new URLSearchParams(searchParams.toString());
-    if (type === currentType) {
-    params.delete("type");
-    } else {
-    params.set("type", type);
-    }
-    router.push(`/?${params.toString()}`);
-};
-return (
-    <section className='mx-4 my-8 bg-[#F4F4F4] rounded-2xl'>
-        <div className='p-6'>
-            <div className='flex '>
-                <div className='lg:w-[50%]'>
-                    <h1 className='uppercase text-xl w-[65%] pb-5'>
-                        suscribe to our newsletter and be the first to know about our latest releases, offers and news from bagstore.com
-                    </h1>
-                    <span className='flex justify-between border px-6 py-2 rounded-full w-[60%] '>
-                        <input type="email" name="email" id="email" placeholder='Enter your email here' className='  bg-transparent  focus:outline-none text-lg'/>
-                        <button>
-                            <HiArrowRight size={20} />
-                        </button>
-                    </span>
-                    <span className='flex gap-2 pt-3 items-center'>
-                        <input type="radio" name="" id="" className='w-5 h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black '/>
-                        <label htmlFor="">I have read and agree to the bagstore privacy policy</label>
-                    </span>
+    const handleFilter = (type: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (type === currentType) {
+            params.delete("type");
+        } else {
+            params.set("type", type);
+        }
+        router.push(`/?${params.toString()}`);
+    };
+
+    // Function to scroll to top
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    return (
+        <section className='mx-4 my-8 bg-[#F4F4F4] rounded-2xl'>
+            <div className='p-6'>
+                <div className='flex '>
+                    <div className='lg:w-[50%]'>
+                        <h1 className='uppercase text-xl w-[65%] pb-5'>
+                            suscribe to our newsletter and be the first to know about our latest releases, offers and news from bagstore.com
+                        </h1>
+                        <span className='flex justify-between border px-6 py-2 rounded-full w-[60%] '>
+                            <input type="email" name="email" id="email" placeholder='Enter your email here' className='  bg-transparent  focus:outline-none text-lg'/>
+                            <button>
+                                <HiArrowRight size={20} />
+                            </button>
+                        </span>
+                        <span className='flex gap-2 pt-3 items-center'>
+                            <input type="radio" name="" id="" className='w-5 h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black '/>
+                            <label htmlFor="">I have read and agree to the bagstore privacy policy</label>
+                        </span>
+                        
+                    </div>
+                    <div className='flex  justify-between w-[30%]'>
+                        <div>
+                            <h1 className='capitalize text-2xl'>
+                                Menu
+                            </h1>
+                            <ul>
+                                {menuLinks.map((menu, index) => (
+                                    <li key={index}>
+                                        <button
+                                        onClick={() => handleFilter(menu.name.toLowerCase())}
+                                        className="hover:underline text-left"
+                                        >
+                                        {menu.name}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>   
+                        </div>
+                        <div>
+                            <h1 className='capitalize text-2xl'>
+                                Support
+                            </h1>
+                            <ul>
+                                {supportlinks.map((support, index) => (
+                                    <li key={index}>
+                                        <a href={support.link}>{support.name}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                     
                 </div>
-                <div className='flex  justify-between w-[30%]'>
-                    <div>
-                        <h1 className='capitalize text-2xl'>
-                            Menu
-                        </h1>
-                        <ul>
-                            {menuLinks.map((menu, index) => (
-                                <li key={index}>
-                                    <button
-                                    onClick={() => handleFilter(menu.name.toLowerCase())}
-                                    className="hover:underline text-left"
-                                    >
-                                    {menu.name}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>   
+                <div className='flex justify-between pt-6 items-center'>
+                    <div className='flex items-center'>
+                        {logoImage.map((logo, index) => (
+                            <div key={index}>
+                                <Image src={logo.image} alt={logo.alt}  className='w-16'/>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='flex gap-3'>
+                        {appIcons.map((app, index) => (
+                            <div key={index}>
+                                <a href={app.link}>
+                                    <app.icon size={20} />
+                                </a>
+                            </div>
+                        ))}
                     </div>
                     <div>
-                        <h1 className='capitalize text-2xl'>
-                            Support
-                        </h1>
-                        <ul>
-                            {supportlinks.map((support, index) => (
-                                <li key={index}>
-                                    <a href={support.link}>{support.name}</a>
-                                </li>
-                            ))}
-                        </ul>
+                        <button 
+                            onClick={scrollToTop}
+                            className='flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors'
+                        >
+                            Back to top
+                            <HiArrowUp size={15} />
+                        </button>
                     </div>
                 </div>
-                
             </div>
-            <div className='flex justify-between pt-6 items-center'>
-                <div className='flex items-center'>
-                    {logoImage.map((logo, index) => (
-                        <div key={index}>
-                            <Image src={logo.image} alt={logo.alt}  className='w-16'/>
-                        </div>
-                    ))}
-                </div>
-                <div className='flex gap-3'>
-                    {appIcons.map((app, index) => (
-                        <div key={index}>
-                            <a href={app.link}>
-                                <app.icon size={20} />
-                            </a>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <button className='flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors'>
-                        Back to top
-                        <HiArrowUp size={15} />
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-  )
+        </section>
+    )
 }
 
 export default Footer
