@@ -7,6 +7,16 @@ import headerImg from '../../../public/hero-image/luxury-bag.png'
 import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2";
 
 const Header = () => {
+
+    const scrollToProducts = () => {
+    const productsSection = document.getElementById('products')
+    if (productsSection) {
+      productsSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
   return (
     <section className='bg-[#F4F4F4] mt-5 mx-4  rounded-xl h-[75vh] overflow-hidden relative '>
             <div className='uppercase absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-0 text-[#e3e1e19c] text-[210px] font-bold select-none pointer-events-none whitespace-nowrap'>
@@ -30,7 +40,9 @@ const Header = () => {
                             </p>
                         </div>
                         
-                            <button className='capitalize text-xl flex items-center gap-2 bg-white  rounded-full px-5 py-2 border border-[#dad8d8] mt-4 hover:text-white hover:!bg-black'>
+                            <button
+                            onClick={scrollToProducts}
+                            className='capitalize text-xl flex items-center gap-2 bg-white  rounded-full px-5 py-2 border border-[#dad8d8] mt-4 hover:text-white hover:!bg-black'>
                                 Start shopping
                                 <HiArrowRight size={15}/>
                             </button>
