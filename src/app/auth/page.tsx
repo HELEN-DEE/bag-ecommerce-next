@@ -3,7 +3,12 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/context/authContext'
-
+import { auth } from '@/app/firebase/config'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth'
 import { toast } from 'sonner'
 
 const AuthPage = () => {
@@ -16,40 +21,56 @@ const AuthPage = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  setError(null);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
 
-  if (!email || !password) {
-    setError("Email and password are required");
-    return;
+    if (!email || !password) {
+      setError("Email and password are required")
+      return
+    }
+
+    if (tab === "signup" && !name) {
+      setError("Name is required for sign up")
+      return
+    }
+
+    try {
+      if (tab === "signup") {
+        // Create user in Firebase
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        
+        // Set displayName in Firebase
+        await updateProfile(userCredential.user, {
+          displayName: name,
+        })
+
+        // Update local context
+        login({ name, email })
+
+        toast.success(`Account created successfully! 🎉`)
+      } else {
+        // Sign in user
+        const userCredential = await signInWithEmailAndPassword(auth, email, password)
+        
+        // Get displayName from Firebase
+        const displayName =
+          userCredential.user.displayName || email.split('@')[0]
+        
+        login({ name: displayName, email })
+
+        toast.success(`Welcome back, ${displayName}! 👋`)
+      }
+
+      // Redirect after toast
+      setTimeout(() => {
+        router.push("/")
+      }, 1000)
+
+    } catch (err: any) {
+      setError(err.message || "Something went wrong")
+    }
   }
-
-  if (tab === "signup" && !name) {
-    setError("Name is required for sign up");
-    return;
-  }
-
-  const userData = {
-    name: tab === "signup" ? name : email.split("@")[0],
-    email,
-  };
-
-  login(userData); // ⬅️ your context method
-
-  // Show a Sonner toast
-  if (tab === "signup") {
-    toast.success(`Account created successfully! 🎉`);
-  } else {
-    toast.success(`Welcome back, ${userData.name}! 👋`);
-  }
-
-  // Slight delay before redirecting so toast shows clearly
-  setTimeout(() => {
-    router.push("/");
-  }, 1000);
-};
-
 
   return (
     <div className="flex justify-center mt-10">
@@ -129,8 +150,8 @@ const AuthPage = () => {
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition-colors"
           >
             {tab === 'signin' ? 'Sign In' : 'Sign Up'}
