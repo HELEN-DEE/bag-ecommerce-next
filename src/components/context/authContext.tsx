@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '@/app/firebase/config' // make sure this points to your Firebase config
+import { auth } from '@/app/firebase/config'
 
 type User = { name: string; email: string } | null
 
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe()
   }, [])
 
-  // Optional: Keep localStorage for non-Firebase persistence
+  // Keep localStorage for non-Firebase persistence
   useEffect(() => {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user))

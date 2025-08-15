@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import headerImg from '../../../public/hero-image/luxury-bag.png'
-// Import your other images here
 import headerImg3 from '../../../public/hero-image/luxury-bag-3.png'
 import headerImg4 from '../../../public/hero-image/luxury-bag-4.png'
 
 import { HiMiniArrowDownRight, HiArrowRight, HiArrowLeft } from "react-icons/hi2";
 
 const Header = () => {
-    // Array of images - replace with your actual imported images
+    // Array of images 
     const images = [
         headerImg,
         headerImg3,
@@ -111,20 +110,7 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* Optional: Image indicators
-            <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-30'>
-                {images.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                            index === currentImageIndex 
-                                ? 'bg-black' 
-                                : 'bg-gray-400 hover:bg-gray-600'
-                        }`}
-                    />
-                ))}
-            </div> */}
+    
         </section>
     )
 }
