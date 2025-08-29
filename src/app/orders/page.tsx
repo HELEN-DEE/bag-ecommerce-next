@@ -61,7 +61,7 @@ const OrdersPage = () => {
                         </svg>
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">No orders yet</h3>
-                    <p className="text-gray-600 mb-6">You haven't placed any orders yet. Start shopping to see your orders here!</p>
+                    <p className="text-gray-600 mb-6">You haven&apos;t placed any orders yet. Start shopping to see your orders here!</p>
                     <Link href="/products" className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
                         Start Shopping
                     </Link>

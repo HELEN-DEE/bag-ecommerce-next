@@ -3,25 +3,63 @@
 import React, { useState } from 'react'
 import { useAuth } from '@/components/context/authContext'
 import Link from 'next/link'
-import { FaLongArrowAltLeft, FaCreditCard, FaMapMarkerAlt, FaBell, FaShield, FaEye, FaEyeSlash, FaTrash, FaPlus } from "react-icons/fa"
-import { FiSave, FiEdit3, FiX, FiCheck } from "react-icons/fi"
+import { FaLongArrowAltLeft, FaEye, FaEyeSlash, FaTrash, FaPlus } from "react-icons/fa"
+import { FiEdit3 } from "react-icons/fi"
+
+interface PasswordData {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+}
+
+interface Notifications {
+    emailOrders: boolean;
+    emailPromotions: boolean;
+    emailNewsletter: boolean;
+    pushOrders: boolean;
+    pushPromotions: boolean;
+    smsOrders: boolean;
+}
+
+interface Privacy {
+    profileVisibility: 'public' | 'friends' | 'private';
+    showEmail: boolean;
+    showPhone: boolean;
+    dataSharing: boolean;
+    analytics: boolean;
+}
+
+interface PaymentMethod {
+    id: number;
+    type: string;
+    last4: string;
+    expiry: string;
+    isDefault: boolean;
+}
+
+interface ShippingAddress {
+    id: number;
+    name: string;
+    address: string;
+    isDefault: boolean;
+}
 
 const SettingsPage = () => {
-    const { user, updateUser, logout } = useAuth()
-    const [activeTab, setActiveTab] = useState('account')
+    const { user, logout } = useAuth() // Removed unused updateUser
+    const [activeTab, setActiveTab] = useState<'account' | 'notifications' | 'privacy' | 'payment' | 'shipping'>('account')
     const [showCurrentPassword, setShowCurrentPassword] = useState(false)
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     
     // Account Settings State
-    const [passwordData, setPasswordData] = useState({
+    const [passwordData, setPasswordData] = useState<PasswordData>({
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
     })
 
     // Notification Settings State
-    const [notifications, setNotifications] = useState({
+    const [notifications, setNotifications] = useState<Notifications>({
         emailOrders: true,
         emailPromotions: false,
         emailNewsletter: true,
@@ -31,7 +69,7 @@ const SettingsPage = () => {
     })
 
     // Privacy Settings State
-    const [privacy, setPrivacy] = useState({
+    const [privacy, setPrivacy] = useState<Privacy>({
         profileVisibility: 'friends',
         showEmail: false,
         showPhone: false,
@@ -40,13 +78,13 @@ const SettingsPage = () => {
     })
 
     // Payment Methods State
-    const [paymentMethods, setPaymentMethods] = useState([
+    const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([
         { id: 1, type: 'Visa', last4: '4242', expiry: '12/25', isDefault: true },
         { id: 2, type: 'Mastercard', last4: '8888', expiry: '09/26', isDefault: false }
     ])
 
     // Shipping Addresses State
-    const [addresses, setAddresses] = useState([
+    const [addresses, setAddresses] = useState<ShippingAddress[]>([
         { 
             id: 1, 
             name: 'Home', 
@@ -72,7 +110,7 @@ const SettingsPage = () => {
         )
     }
 
-    const handlePasswordChange = (e: React.FormEvent) => {
+    const handlePasswordChange = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (passwordData.newPassword !== passwordData.confirmPassword) {
             alert('Passwords do not match')
@@ -92,11 +130,11 @@ const SettingsPage = () => {
     }
 
     const tabs = [
-        { id: 'account', label: 'Account', icon: '👤' },
-        { id: 'notifications', label: 'Notifications', icon: '🔔' },
-        { id: 'privacy', label: 'Privacy', icon: '🔒' },
-        { id: 'payment', label: 'Payment', icon: '💳' },
-        { id: 'shipping', label: 'Shipping', icon: '📦' }
+        { id: 'account' as const, label: 'Account', icon: '👤' },
+        { id: 'notifications' as const, label: 'Notifications', icon: '🔔' },
+        { id: 'privacy' as const, label: 'Privacy', icon: '🔒' },
+        { id: 'payment' as const, label: 'Payment', icon: '💳' },
+        { id: 'shipping' as const, label: 'Shipping', icon: '📦' }
     ]
 
     return (
@@ -153,7 +191,7 @@ const SettingsPage = () => {
                                                 <input
                                                     type={showCurrentPassword ? 'text' : 'password'}
                                                     value={passwordData.currentPassword}
-                                                    onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordData({...passwordData, currentPassword: e.target.value})}
                                                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                                                 />
                                                 <button
@@ -172,7 +210,7 @@ const SettingsPage = () => {
                                                 <input
                                                     type={showNewPassword ? 'text' : 'password'}
                                                     value={passwordData.newPassword}
-                                                    onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordData({...passwordData, newPassword: e.target.value})}
                                                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                                                 />
                                                 <button
@@ -191,7 +229,7 @@ const SettingsPage = () => {
                                                 <input
                                                     type={showConfirmPassword ? 'text' : 'password'}
                                                     value={passwordData.confirmPassword}
-                                                    onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
                                                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                                                 />
                                                 <button
@@ -239,15 +277,15 @@ const SettingsPage = () => {
                                         <h3 className="text-lg font-medium mb-4">Email Notifications</h3>
                                         <div className="space-y-3">
                                             {[
-                                                { key: 'emailOrders', label: 'Order confirmations and updates' },
-                                                { key: 'emailPromotions', label: 'Promotional offers and discounts' },
-                                                { key: 'emailNewsletter', label: 'Weekly newsletter' }
+                                                { key: 'emailOrders' as const, label: 'Order confirmations and updates' },
+                                                { key: 'emailPromotions' as const, label: 'Promotional offers and discounts' },
+                                                { key: 'emailNewsletter' as const, label: 'Weekly newsletter' }
                                             ].map((item) => (
                                                 <label key={item.key} className="flex items-center">
                                                     <input
                                                         type="checkbox"
-                                                        checked={notifications[item.key as keyof typeof notifications]}
-                                                        onChange={(e) => setNotifications({
+                                                        checked={notifications[item.key]}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNotifications({
                                                             ...notifications,
                                                             [item.key]: e.target.checked
                                                         })}
@@ -263,14 +301,14 @@ const SettingsPage = () => {
                                         <h3 className="text-lg font-medium mb-4">Push Notifications</h3>
                                         <div className="space-y-3">
                                             {[
-                                                { key: 'pushOrders', label: 'Order status updates' },
-                                                { key: 'pushPromotions', label: 'Special offers' }
+                                                { key: 'pushOrders' as const, label: 'Order status updates' },
+                                                { key: 'pushPromotions' as const, label: 'Special offers' }
                                             ].map((item) => (
                                                 <label key={item.key} className="flex items-center">
                                                     <input
                                                         type="checkbox"
-                                                        checked={notifications[item.key as keyof typeof notifications]}
-                                                        onChange={(e) => setNotifications({
+                                                        checked={notifications[item.key]}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNotifications({
                                                             ...notifications,
                                                             [item.key]: e.target.checked
                                                         })}
@@ -289,7 +327,7 @@ const SettingsPage = () => {
                                                 <input
                                                     type="checkbox"
                                                     checked={notifications.smsOrders}
-                                                    onChange={(e) => setNotifications({
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNotifications({
                                                         ...notifications,
                                                         smsOrders: e.target.checked
                                                     })}
@@ -313,7 +351,7 @@ const SettingsPage = () => {
                                         <label className="block text-sm font-medium text-gray-700 mb-2">Profile Visibility</label>
                                         <select
                                             value={privacy.profileVisibility}
-                                            onChange={(e) => setPrivacy({...privacy, profileVisibility: e.target.value})}
+                                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setPrivacy({...privacy, profileVisibility: e.target.value as Privacy['profileVisibility']})}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                                         >
                                             <option value="public">Public</option>
@@ -325,14 +363,14 @@ const SettingsPage = () => {
                                     <div className="space-y-3">
                                         <h3 className="text-lg font-medium">Contact Information</h3>
                                         {[
-                                            { key: 'showEmail', label: 'Show email address in profile' },
-                                            { key: 'showPhone', label: 'Show phone number in profile' }
+                                            { key: 'showEmail' as const, label: 'Show email address in profile' },
+                                            { key: 'showPhone' as const, label: 'Show phone number in profile' }
                                         ].map((item) => (
                                             <label key={item.key} className="flex items-center">
                                                 <input
                                                     type="checkbox"
-                                                    checked={privacy[item.key as keyof typeof privacy]}
-                                                    onChange={(e) => setPrivacy({
+                                                    checked={privacy[item.key]}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrivacy({
                                                         ...privacy,
                                                         [item.key]: e.target.checked
                                                     })}
@@ -346,14 +384,14 @@ const SettingsPage = () => {
                                     <div className="space-y-3">
                                         <h3 className="text-lg font-medium">Data & Analytics</h3>
                                         {[
-                                            { key: 'dataSharing', label: 'Allow data sharing with partners' },
-                                            { key: 'analytics', label: 'Help improve our service with usage analytics' }
+                                            { key: 'dataSharing' as const, label: 'Allow data sharing with partners' },
+                                            { key: 'analytics' as const, label: 'Help improve our service with usage analytics' }
                                         ].map((item) => (
                                             <label key={item.key} className="flex items-center">
                                                 <input
                                                     type="checkbox"
-                                                    checked={privacy[item.key as keyof typeof privacy]}
-                                                    onChange={(e) => setPrivacy({
+                                                    checked={privacy[item.key]}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrivacy({
                                                         ...privacy,
                                                         [item.key]: e.target.checked
                                                     })}
