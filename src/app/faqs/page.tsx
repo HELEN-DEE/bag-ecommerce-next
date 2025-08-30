@@ -4,7 +4,7 @@ import { FiPlus, FiMinus, FiSearch } from "react-icons/fi"
 import Link from 'next/link'
 
 const FAQsPage = () => {
-  const [openFAQ, setOpenFAQ] = useState(null)
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
 
   const faqs = [
@@ -108,7 +108,7 @@ const FAQsPage = () => {
     faq.category.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const toggleFAQ = (id) => {
+  const toggleFAQ = (id: number) => {
     setOpenFAQ(openFAQ === id ? null : id)
   }
 
