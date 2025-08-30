@@ -4,7 +4,7 @@ import Image from 'next/image'
 import holdBagImg from '../../../public/bag-holding-images/holding-bag-1-.png'  
 import holdBagImg2 from '../../../public/bag-holding-images/holding-bag-2-.png'
 import { HiArrowUpRight } from "react-icons/hi2";
-import next from 'next';
+
 
 const explore = [
     {

@@ -7,7 +7,7 @@ export type Product = {
   title?: string;
   name?: string;
   price: string | number;
-  [key: string]: any;
+  
 };
 
 export type Order = {

@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { toast } from 'sonner'
+import { FirebaseError } from "firebase/app"
 
 const AuthPage = () => {
   const router = useRouter()
@@ -35,45 +36,31 @@ const AuthPage = () => {
       return
     }
 
-    try {
+        try {
       if (tab === "signup") {
-        // Create user in Firebase
         const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-        
-        // Set displayName in Firebase
-        await updateProfile(userCredential.user, {
-          displayName: name,
-        })
-
-        // Update local context
+        await updateProfile(userCredential.user, { displayName: name })
         login({ name, email })
-
         toast.success(`Account created successfully! 🎉`)
       } else {
-        // Sign in user
         const userCredential = await signInWithEmailAndPassword(auth, email, password)
-        
-        // Get displayName from Firebase
-        const displayName =
-          userCredential.user.displayName || email.split('@')[0]
-        
+        const displayName = userCredential.user.displayName || email.split('@')[0]
         login({ name: displayName, email })
-
         toast.success(`Welcome back, ${displayName}! 👋`)
       }
 
-      // Redirect after toast
       setTimeout(() => {
         router.push("/")
       }, 1000)
-
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message)
-      } else {
-        setError("Something went wrong")
-      }
-    }
+  if (err instanceof FirebaseError) {
+    setError(err.message) // Firebase gives helpful messages
+  } else {
+    setError("Something went wrong")
+  }
+  toast.error("Authentication failed ❌")
+}
+
   }
 
   return (
@@ -164,6 +151,6 @@ const AuthPage = () => {
       </div>
     </div>
   )
-}
+};
 
 export default AuthPage
