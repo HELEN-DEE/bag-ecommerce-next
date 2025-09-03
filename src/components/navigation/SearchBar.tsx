@@ -1,5 +1,5 @@
 "use client";
-import {useState, useEffect} from "react";
+import { useState, useEffect, Suspense } from "react";
 import { FiSearch, FiFilter, FiX, FiCheck } from "react-icons/fi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import React from "react";
@@ -16,11 +16,12 @@ const buttonMain = [
 ];
 
 const buttonSub = [
-  {label: "About", type: "about", link: "/about"},
-  {label: "FAQs", type: "faqs", link: "/faqs"},
+  { label: "About", type: "about", link: "/about" },
+  { label: "FAQs", type: "faqs", link: "/faqs" },
 ];
 
-const SearchBar = () => {
+// Inner component that actually uses useSearchParams
+const SearchBarInner = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -28,58 +29,51 @@ const SearchBar = () => {
   const router = useRouter();
   const currentType = searchParams.get("type");
 
-  // Check if mobile on mount and window resize
+  // Detect mobile screen
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
+      setIsMobile(window.innerWidth < 768);
     };
-    
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Close filter modal when clicking outside or pressing escape
+  // Escape key closes modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsFilterOpen(false);
+      if (e.key === "Escape") setIsFilterOpen(false);
     };
 
     if (isFilterOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
     };
   }, [isFilterOpen]);
 
   const handleFilter = (type: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (type === currentType) {
-      params.delete("type"); // Toggle off
+      params.delete("type");
     } else {
       params.set("type", type);
     }
     router.push(`/?${params.toString()}`);
-    
-    // Close mobile filter after selection
-    if (isMobile) {
-      setIsFilterOpen(false);
-    }
+    if (isMobile) setIsFilterOpen(false);
   };
 
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString());
-    
     if (searchQuery) {
       params.set("search", searchQuery);
     } else {
       params.delete("search");
     }
-    
     router.push(`/?${params.toString()}`);
   };
 
@@ -94,7 +88,7 @@ const SearchBar = () => {
 
   const getActiveFilterLabel = () => {
     if (!currentType) return "All Categories";
-    return buttonMain.find(item => item.type === currentType)?.label || "All Categories";
+    return buttonMain.find((item) => item.type === currentType)?.label || "All Categories";
   };
 
   const activeFiltersCount = currentType ? 1 : 0;
@@ -105,9 +99,8 @@ const SearchBar = () => {
         {/* Mobile Layout */}
         {isMobile ? (
           <div className="flex flex-col space-y-4">
-            {/* Search Bar and Mobile Filter Button */}
+            {/* Search Bar + Mobile Filter Button */}
             <div className="flex gap-3 items-center">
-              {/* Mobile Filter Toggle Button */}
               <button
                 onClick={() => setIsFilterOpen(true)}
                 className="bg-[#F4F4F4] rounded-2xl p-3 hover:bg-black hover:text-white transition-colors relative"
@@ -121,25 +114,25 @@ const SearchBar = () => {
               </button>
 
               {/* Search Input */}
-              <div className='bg-[#F4F4F4] rounded-2xl flex items-center flex-1 max-w-[460px]'>
-                <input 
-                  type="search" 
-                  placeholder='Search products...' 
-                  className='px-4 py-3 flex-grow bg-transparent outline-none text-sm'
+              <div className="bg-[#F4F4F4] rounded-2xl flex items-center flex-1 max-w-[460px]">
+                <input
+                  type="search"
+                  placeholder="Search products..."
+                  className="px-4 py-3 flex-grow bg-transparent outline-none text-sm"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
-                <button 
+                <button
                   onClick={handleSearch}
-                  className='bg-white rounded-full p-2 mx-2 hover:bg-black hover:text-white transition-colors'
+                  className="bg-white rounded-full p-2 mx-2 hover:bg-black hover:text-white transition-colors"
                 >
-                  <FiSearch size={18}/>
+                  <FiSearch size={18} />
                 </button>
               </div>
             </div>
 
-            {/* Current Filter Display */}
+            {/* Filter Label + Clear Button */}
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setIsFilterOpen(true)}
@@ -148,7 +141,7 @@ const SearchBar = () => {
                 <span>{getActiveFilterLabel()}</span>
                 <MdKeyboardArrowDown size={18} />
               </button>
-              
+
               {activeFiltersCount > 0 && (
                 <button
                   onClick={clearAllFilters}
@@ -171,9 +164,8 @@ const SearchBar = () => {
             </div>
           </div>
         ) : (
-          /* Desktop Layout - Everything on one line */
+          /* Desktop Layout */
           <div className="flex items-center gap-3 flex-wrap">
-            {/* Filter Buttons */}
             {buttonMain.map((item) => (
               <button
                 key={item.type}
@@ -185,25 +177,23 @@ const SearchBar = () => {
               </button>
             ))}
 
-            {/* Search Input */}
-            <div className='bg-[#F4F4F4] rounded-2xl flex items-center max-w-[460px] flex-1'>
-              <input 
-                type="search" 
-                placeholder='Search products...' 
-                className='px-4 py-3 flex-grow bg-transparent outline-none text-base'
+            <div className="bg-[#F4F4F4] rounded-2xl flex items-center max-w-[460px] flex-1">
+              <input
+                type="search"
+                placeholder="Search products..."
+                className="px-4 py-3 flex-grow bg-transparent outline-none text-base"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               />
-              <button 
+              <button
                 onClick={handleSearch}
-                className='bg-white rounded-full p-2 mx-2 hover:bg-black hover:text-white transition-colors'
+                className="bg-white rounded-full p-2 mx-2 hover:bg-black hover:text-white transition-colors"
               >
-                <FiSearch size={18}/>
+                <FiSearch size={18} />
               </button>
             </div>
 
-            {/* Sub Buttons */}
             {buttonSub.map((item) => (
               <Link key={item.type} href={item.link}>
                 <button className="bg-[#F4F4F4] px-4 py-2 text-sm lg:text-base rounded-2xl hover:bg-black hover:text-white transition-colors">
@@ -218,15 +208,11 @@ const SearchBar = () => {
       {/* Mobile Filter Modal */}
       {isMobile && isFilterOpen && (
         <>
-          {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={() => setIsFilterOpen(false)}
           />
-          
-          {/* Modal */}
           <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl z-50 max-h-[80vh] overflow-y-auto">
-            {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold">Filter & Sort</h2>
               <button
@@ -237,11 +223,8 @@ const SearchBar = () => {
               </button>
             </div>
 
-            {/* Filter Options */}
             <div className="p-6">
               <h3 className="text-lg font-medium mb-4">Categories</h3>
-              
-              {/* All Categories Option */}
               <button
                 onClick={() => handleFilter("")}
                 className={`w-full flex items-center justify-between p-4 rounded-lg border-2 mb-3 transition-all
@@ -251,7 +234,6 @@ const SearchBar = () => {
                 {!currentType && <FiCheck size={20} className="text-black" />}
               </button>
 
-              {/* Category Options */}
               <div className="space-y-3">
                 {buttonMain.map((item) => (
                   <button
@@ -267,7 +249,6 @@ const SearchBar = () => {
               </div>
             </div>
 
-            {/* Modal Footer */}
             <div className="p-6 border-t border-gray-200 bg-gray-50 flex gap-3">
               <button
                 onClick={clearAllFilters}
@@ -288,5 +269,12 @@ const SearchBar = () => {
     </>
   );
 };
+
+// Wrap inside Suspense to fix Vercel build error
+const SearchBar = () => (
+  <Suspense fallback={<div>Loading search bar...</div>}>
+    <SearchBarInner />
+  </Suspense>
+);
 
 export default SearchBar;
