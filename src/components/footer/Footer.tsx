@@ -1,4 +1,5 @@
 "use client";
+import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { HiArrowRight, HiArrowUp } from "react-icons/hi2";
@@ -11,6 +12,12 @@ import {
 import VisaLogo from "../../../public/footer-images/Visa.png";
 import MasterCardLogo from "../../../public/footer-images/Mastercard.png";
 import PayPalLogo from "../../../public/footer-images/paypal.png";
+
+  const footerWrapper = () => {
+  return <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+    <Footer />
+  </Suspense>
+}
 
 const menuLinks = [
   { name: "Men", link: "/men" },
@@ -41,7 +48,11 @@ const appIcons = [
   { icon: RiLinkedinBoxLine, link: "/linkedin" },
 ];
 
+
+
+
 const Footer = () => {
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const currentType = searchParams.get("type");
@@ -153,4 +164,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default footerWrapper;

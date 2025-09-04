@@ -6,6 +6,13 @@ import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
+const SearchBar = () => {
+    return <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+      <SearchBarInner />
+    </Suspense>
+  }
+
+
 const buttonMain = [
   { label: "Men", type: "men" },
   { label: "Women", type: "women" },
@@ -29,6 +36,7 @@ const SearchBarInner = () => {
   const router = useRouter();
   const currentType = searchParams.get("type");
 
+  
   // Detect mobile screen
   useEffect(() => {
     const checkMobile = () => {
@@ -270,11 +278,6 @@ const SearchBarInner = () => {
   );
 };
 
-// Wrap inside Suspense to fix Vercel build error
-const SearchBar = () => (
-  <Suspense fallback={<div>Loading search bar...</div>}>
-    <SearchBarInner />
-  </Suspense>
-);
+
 
 export default SearchBar;

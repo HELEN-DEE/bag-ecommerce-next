@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { IoCartOutline } from "react-icons/io5";
@@ -7,6 +7,12 @@ import { RiPokerHeartsLine } from "react-icons/ri";
 import { IoMdCheckmark } from "react-icons/io";
 import { products } from "@/data/products";
 import { useCart } from "@/components/context/cartContext";
+
+const productWrapper = () => {
+  return <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+    <Products />
+  </Suspense>
+}
 
 const radioOptions = [
   { name: "All collection", value: "all" },
@@ -161,4 +167,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default productWrapper;
