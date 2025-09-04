@@ -150,6 +150,7 @@ const Footer = () => {
             ))}
           </div>
           <div>
+            {/* something */}
             <button
               onClick={scrollToTop}
               className="flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors"
