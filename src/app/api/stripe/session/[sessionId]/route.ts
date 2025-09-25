@@ -3,10 +3,11 @@ import { stripe } from '@/../lib/stripe'
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const { sessionId } = params
+    // Await the params to resolve the Promise
+    const { sessionId } = await params
 
     if (!sessionId) {
       return NextResponse.json(
