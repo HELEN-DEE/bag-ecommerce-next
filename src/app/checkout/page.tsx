@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useCart, type Product as CartProduct, type Order } from '@/components/context/cartContext'
 import { products } from '@/data/products'
-import { FaLongArrowAltLeft, FaCheck } from 'react-icons/fa'
+import { FaLongArrowAltLeft, FaCheck, FaCreditCard, FaShoppingBag } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { toast } from 'sonner'
@@ -22,8 +22,16 @@ interface Product {
 // Order data type for placing orders (matches your cart context)
 type OrderData = Omit<Order, 'id' | 'date' | 'items' | 'status'>
 
+// Stripe checkout item type
+interface StripeCheckoutItem {
+  id: string | number
+  name: string
+  price: number
+  quantity: number
+}
+
 // Constants
-const TAX_RATE = 0.05 // 5% tax rate
+const TAX_RATE = 0.05 // 5% tax rate (Note: Stripe can handle automatic tax)
 const PROCESSING_DELAY = 1500 // 1.5 seconds for demo
 
 const CheckoutPage: React.FC = () => {
@@ -32,6 +40,8 @@ const CheckoutPage: React.FC = () => {
   const [orderPlaced, setOrderPlaced] = useState<boolean>(false)
   const [placedOrder, setPlacedOrder] = useState<Order | null>(null)
   const [error, setError] = useState<string>('')
+  const [paymentMethod, setPaymentMethod] = useState<'local' | 'stripe'>('stripe')
+  const [customerEmail, setCustomerEmail] = useState<string>('')
   const router = useRouter()
 
   // Memoized cart products to prevent unnecessary recalculations
@@ -81,8 +91,69 @@ const CheckoutPage: React.FC = () => {
     return subtotal + tax
   }, [subtotal, tax])
 
-  // Handle order placement with proper error handling
-  const handlePlaceOrder = useCallback(async (): Promise<void> => {
+  // Handle Stripe payment
+  const handleStripePayment = useCallback(async (): Promise<void> => {
+    if (cartProducts.length === 0 || total <= 0) {
+      toast.error('Invalid cart or total amount')
+      return
+    }
+
+    setIsProcessing(true)
+    setError('')
+
+    try {
+      // Prepare items for Stripe
+      const stripeItems: StripeCheckoutItem[] = cartProducts.map(product => ({
+        id: product.id,
+        name: getProductTitle(product),
+        price: getPrice(product),
+        quantity: 1, // You can modify this based on your cart structure
+      }))
+
+      // Create checkout session
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: stripeItems,
+          successUrl: `${window.location.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancelUrl: `${window.location.origin}/checkout?cancelled=true`,
+          customerEmail: customerEmail || undefined,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to create checkout session')
+      }
+
+      const { url } = await response.json()
+
+      if (!url) {
+        throw new Error('No checkout URL received')
+      }
+
+      // Redirect to Stripe Checkout
+      window.location.href = url
+
+    } catch (error: unknown) {
+      console.error('Stripe payment error:', error)
+      if (error instanceof Error) {
+        setError(error.message || 'Failed to process payment')
+        toast.error(error.message || 'Failed to process payment')
+      } else {
+        setError('Failed to process payment')
+        toast.error('Failed to process payment')
+      }
+    } finally {
+      setIsProcessing(false)
+    }
+  }, [cartProducts, total, customerEmail, getProductTitle, getPrice])
+
+  // Handle local order placement (existing functionality)
+  const handleLocalOrder = useCallback(async (): Promise<void> => {
     if (cartProducts.length === 0) {
       toast.error('Your cart is empty')
       return
@@ -140,6 +211,14 @@ const CheckoutPage: React.FC = () => {
       setIsProcessing(false)
     }
   }, [cartProducts, subtotal, tax, total, placeOrder, getProductTitle])
+
+  const handlePlaceOrder = useCallback(async (): Promise<void> => {
+    if (paymentMethod === 'stripe') {
+      await handleStripePayment()
+    } else {
+      await handleLocalOrder()
+    }
+  }, [paymentMethod, handleStripePayment, handleLocalOrder])
 
   const handleContinueShopping = useCallback((): void => {
     router.push('/')
@@ -246,9 +325,7 @@ const CheckoutPage: React.FC = () => {
       {cartProducts.length === 0 ? (
         <div className="text-center py-12">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z" />
-            </svg>
+            <FaShoppingBag className="w-8 h-8 text-gray-400" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
           <p className="text-gray-500 mb-6">Add some items to your cart to continue shopping</p>
@@ -288,13 +365,76 @@ const CheckoutPage: React.FC = () => {
                 <span>Subtotal ({cartProducts.length} {cartProducts.length === 1 ? 'item' : 'items'})</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
-                <span>Tax ({(TAX_RATE * 100).toFixed(0)}%)</span>
-                <span>${tax.toFixed(2)}</span>
-              </div>
+              {paymentMethod === 'local' && (
+                <div className="flex justify-between text-gray-600">
+                  <span>Tax ({(TAX_RATE * 100).toFixed(0)}%)</span>
+                  <span>${tax.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between text-lg font-bold text-gray-900 border-t border-gray-200 pt-3">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>${paymentMethod === 'stripe' ? subtotal.toFixed(2) : total.toFixed(2)}</span>
+              </div>
+              {paymentMethod === 'stripe' && (
+                <p className="text-xs text-gray-500">Tax and shipping calculated at checkout</p>
+              )}
+            </div>
+          </div>
+
+          {/* Customer Email for Stripe */}
+          {paymentMethod === 'stripe' && (
+            <div className="mb-6">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address (Optional)
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                We&#39;ll send your receipt and order updates to this email
+              </p>
+            </div>
+          )}
+
+          {/* Payment Method Selection */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="stripe"
+                  name="payment"
+                  value="stripe"
+                  checked={paymentMethod === 'stripe'}
+                  onChange={(e) => setPaymentMethod(e.target.value as 'stripe')}
+                  className="mr-3"
+                />
+                <label htmlFor="stripe" className="flex items-center cursor-pointer">
+                  <FaCreditCard className="mr-2 text-blue-600" />
+                  <span>Secure Card Payment (Stripe)</span>
+                  <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Recommended</span>
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="local"
+                  name="payment"
+                  value="local"
+                  checked={paymentMethod === 'local'}
+                  onChange={(e) => setPaymentMethod(e.target.value as 'local')}
+                  className="mr-3"
+                />
+                <label htmlFor="local" className="flex items-center cursor-pointer">
+                  <FaShoppingBag className="mr-2 text-gray-600" />
+                  <span>Test Order (Local)</span>
+                </label>
               </div>
             </div>
           </div>
@@ -314,10 +454,16 @@ const CheckoutPage: React.FC = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Processing Order...
+                  {paymentMethod === 'stripe' ? 'Redirecting to Payment...' : 'Processing Order...'}
                 </span>
               ) : (
-                `Place Order • $${total.toFixed(2)}`
+                <>
+                  {paymentMethod === 'stripe' ? (
+                    <>Pay with Stripe • ${subtotal.toFixed(2)}</>
+                  ) : (
+                    <>Place Order • ${total.toFixed(2)}</>
+                  )}
+                </>
               )}
             </button>
 
