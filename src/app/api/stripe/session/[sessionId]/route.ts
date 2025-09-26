@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/../lib/stripe'
+import { stripe } from '@/lib/stripe'
 
 export async function GET(
   req: NextRequest,
@@ -17,7 +17,7 @@ export async function GET(
     }
 
     // Retrieve the checkout session from Stripe
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    const session = await stripe().checkout.sessions.retrieve(sessionId, {
       expand: ['line_items', 'line_items.data.price.product']
     })
 
@@ -49,16 +49,15 @@ export async function GET(
         }
       })) || []
     })
-  } catch (error: unknown) {
+  } catch (error) {
     console.error('Session retrieval error:', error)
+    
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     
     return NextResponse.json(
       { 
         error: 'Failed to retrieve session',
-        details:
-          process.env.NODE_ENV === 'development' && error instanceof Error
-            ? error.message
-            : undefined
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
       },
       { status: 500 }
     )

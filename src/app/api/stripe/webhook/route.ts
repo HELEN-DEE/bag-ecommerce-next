@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/../lib/stripe'
+import { stripe } from '@/lib/stripe'
 import { headers } from 'next/headers'
 
 export async function POST(req: NextRequest) {
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   let event
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = stripe().webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
 async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
   try {
     // Retrieve the full session with line items
-    const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
+    const fullSession = await stripe().checkout.sessions.retrieve(session.id, {
       expand: ['line_items', 'line_items.data.price.product']
     })
 

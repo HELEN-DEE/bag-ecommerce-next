@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/../lib/stripe'
-// import { headers } from 'next/headers'
+import { stripe } from '@/lib/stripe'
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,7 +37,7 @@ export async function POST(req: NextRequest) {
     }))
 
     // Create Stripe checkout session
-    const session = await stripe.checkout.sessions.create({
+    const session = await stripe().checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
@@ -62,18 +61,15 @@ export async function POST(req: NextRequest) {
       sessionId: session.id,
       url: session.url,
     })
-  } catch (error: unknown) {
+  } catch (error) {
     console.error('Stripe checkout error:', error)
     
-    let errorMessage: string | undefined = undefined;
-    if (process.env.NODE_ENV === 'development' && error instanceof Error) {
-      errorMessage = error.message;
-    }
-
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+    
     return NextResponse.json(
       { 
         error: 'Failed to create checkout session',
-        details: errorMessage
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
       },
       { status: 500 }
     )
