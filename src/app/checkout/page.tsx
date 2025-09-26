@@ -7,6 +7,7 @@ import { FaLongArrowAltLeft, FaCheck, FaCreditCard, FaShoppingBag } from 'react-
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import Image from 'next/image'
 
 // Type definitions that match your cart context
 interface Product {
@@ -344,18 +345,40 @@ const CheckoutPage: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h2>
             <ul className="divide-y divide-gray-200 mb-6">
               {cartProducts.map((product, index) => (
-                <li key={`${product.id}-${index}`} className="py-4 flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{getProductTitle(product)}</h3>
-                    {product.description && (
-                      <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
-                    )}
-                    <p className="text-xs text-gray-400 mt-1">ID: {product.id}</p>
-                  </div>
-                  <span className="font-semibold text-gray-900 ml-4">
-                    ${getPrice(product).toFixed(2)}
-                  </span>
-                </li>
+                
+
+<li key={`${product.id}-${index}`} className="py-4 flex gap-4 items-start">
+  {/* Product Image */}
+  {product.image && (
+    <div className="flex-shrink-0">
+      <Image
+        src={product.image} 
+        alt={getProductTitle(product)}
+        width={64}
+        height={64}
+        className="w-20 h-20 object-contain rounded-lg  border-gray-200"
+        onError={(e) => {
+          e.currentTarget.style.display = 'none'
+        }}
+      />
+    </div>
+  )}
+  
+  {/* Product Details and Price */}
+  <div className="flex justify-between items-start flex-1 min-w-0">
+    <div className="flex-1 min-w-0">
+      <h3 className="font-medium text-gray-900 truncate">{getProductTitle(product)}</h3>
+      {product.description && (
+        <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
+      )}
+      <p className="text-xs text-gray-400 mt-1">ID: {product.id}</p>
+    </div>
+    
+    <span className="font-semibold text-gray-900 ml-4 whitespace-nowrap">
+      ${getPrice(product).toFixed(2)}
+    </span>
+  </div>
+</li>
               ))}
             </ul>
 
@@ -483,4 +506,3 @@ const CheckoutPage: React.FC = () => {
 
 export default CheckoutPage
 
-// checking
