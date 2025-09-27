@@ -13,7 +13,7 @@
     "@stripe/react-stripe-js": "^4.0.2",
     "@stripe/stripe-js": "^7.9.0",
     "firebase": "^12.1.0",
-    "framer-motion": "^12.4.10",
+    "framer-motion": "^12.23.22",
     "lucide-react": "^0.474.0",
     "next": "^15.2.4",
     "react": "^19.0.0",

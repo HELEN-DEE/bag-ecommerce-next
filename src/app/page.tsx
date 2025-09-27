@@ -2,6 +2,7 @@
 import React, {Suspense} from 'react';
 import { useSearchParams } from 'next/navigation'
 
+
 import Header from "../components/hero/Header";
 import BrandSupport from "../components/support/BrandSupport";
 import Products from "../components/products/Products";
