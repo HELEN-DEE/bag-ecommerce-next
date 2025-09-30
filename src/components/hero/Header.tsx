@@ -40,7 +40,7 @@ const Header = () => {
     };
 
     return (
-        <section className='bg-[#F4F4F4] mt-5 mx-4 rounded-xl h-[60vh] lg:first-line:h-[80vh] overflow-hidden relative'>
+        <section className='bg-[#F4F4F4] mt-5 mx-4 rounded-xl h-[60vh] lg:h-[75vh] overflow-hidden relative'>
             {/* Background Text */}
             <div className='uppercase absolute left-1/2 top-[70%] lg:top-[58%] -translate-x-1/2 -translate-y-0 text-[#e3e1e19c] text-[70px] sm:text-[140px] md:text-[180px] lg:text-[220px] font-bold select-none pointer-events-none whitespace-nowrap z-10'>
                 <h1>Bagstore</h1>
