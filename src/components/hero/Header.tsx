@@ -39,7 +39,7 @@ const Header = () => {
         );
     };
 
-     return (
+    return (
         <section className='bg-[#F4F4F4] mt-5 mx-4 rounded-xl h-[75vh] overflow-hidden relative'>
             <div className='uppercase absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-0 text-[#e3e1e19c] text-[100px] sm:text-[140px] md:text-[180px] lg:text-[210px] font-bold select-none pointer-events-none whitespace-nowrap z-10'>
                 <h1>Bagstore</h1>
@@ -56,7 +56,7 @@ const Header = () => {
                         </h1>
                     </div>
                     <div className='w-full md:w-[40%]'>
-                        <div className='flex gap-2 justify-center md:justify-start'>
+                        <div className='flex gap-2 justify-center md:justify-start '>
                             <HiMiniArrowDownRight size={25}/>
                             <p className='text-lg md:text-xl'>
                                 Discover the epitome of style and craftmanship without curated leather bag collection 

@@ -76,69 +76,76 @@ const Products = () => {
       </div>
 
       {/* Product Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-        {visibleProducts.map((product) => (
-          <div
-            key={String(product.id)}
-            className="bg-[#F4F4F4] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300"
-            onClick={() => router.push(`/products/${product.id}`)}
-          >
-            <div className="flex justify-between mb-4">
-              <span>
-                <h1 className="text-xl">{product.title}</h1>
-                <p className="font-bold">
-                  ${product.price.replace("$", "").replace("USD", "").trim()}
-                </p>
-              </span>
-              <div
-                className="flex flex-row gap-2 z-20"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  className="bg-white rounded-full w-8 h-8 flex items-center justify-center relative"
-                  onClick={() => toggleCart(String(product.id))}
-                  title="Add to Cart"
-                >
-                  <IoCartOutline
-                    size={18}
-                    color={
-                      cartItems.includes(String(product.id)) ? "green" : "black"
-                    }
-                  />
-                  {cartItems.includes(String(product.id)) && (
-                    <span className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full px-0.5 py-0.5">
-                      <IoMdCheckmark size={10} />
-                    </span>
-                  )}
-                </button>
-
-                <button
-                  className="bg-white rounded-full w-8 h-8 flex items-center justify-center"
-                  onClick={() => toggleFavorite(String(product.id))}
-                  title="Favorite"
-                >
-                  <RiPokerHeartsLine
-                    size={18}
-                    color={
-                      favorites.includes(String(product.id)) ? "red" : "black"
-                    }
-                  />
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <Image
-                src={product.image}
-                alt={product.title}
-                className="object-contain"
-                width={300}
-                height={300}
-                priority
-              />
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
+  {visibleProducts.map((product) => (
+    <div
+      key={String(product.id)}
+      className="bg-[#F4F4F4] rounded-xl p-4 cursor-pointer hover:shadow-md transition-all duration-300 flex flex-col h-full"
+      onClick={() => router.push(`/products/${product.id}`)}
+    >
+      {/* Product Info */}
+      <div className="flex justify-between mb-4">
+        <span>
+          <h1 className="text-xl">{product.title}</h1>
+          <p className="font-bold">
+            ${product.price.replace("$", "").replace("USD", "").trim()}
+          </p>
+        </span>
       </div>
+
+      {/* Product Image */}
+      <div className="flex justify-center flex-1">
+        <Image
+          src={product.image}
+          alt={product.title}
+          className="object-contain"
+          width={300}
+          height={300}
+          priority
+        />
+      </div>
+
+      {/* Buttons positioned at bottom right */}
+      <div className="flex justify-end mt-4 pt-4">
+        <div
+          className="flex flex-row gap-2 z-20"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="bg-white rounded-full w-8 h-8 flex items-center justify-center relative"
+            onClick={() => toggleCart(String(product.id))}
+            title="Add to Cart"
+          >
+            <IoCartOutline
+              size={18}
+              color={
+                cartItems.includes(String(product.id)) ? "green" : "black"
+              }
+            />
+            {cartItems.includes(String(product.id)) && (
+              <span className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full px-0.5 py-0.5">
+                <IoMdCheckmark size={10} />
+              </span>
+            )}
+          </button>
+
+          <button
+            className="bg-white rounded-full w-8 h-8 flex items-center justify-center"
+            onClick={() => toggleFavorite(String(product.id))}
+            title="Favorite"
+          >
+            <RiPokerHeartsLine
+              size={18}
+              color={
+                favorites.includes(String(product.id)) ? "red" : "black"
+              }
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
 
       {/* Show More / Show Less */}
       <div className="text-center mt-6">

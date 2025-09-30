@@ -8,6 +8,7 @@ import { RiPokerHeartsLine } from "react-icons/ri"
 import { MdOutlinePerson, MdClose } from "react-icons/md"
 import { IoCartOutline } from "react-icons/io5"
 import { FiUser, FiPackage, FiSettings, FiLogOut, FiHome, FiShoppingBag, FiHeart, FiStar, FiGrid, FiLayers } from "react-icons/fi"
+import { RiQuestionAnswerLine } from "react-icons/ri";
 import Link from 'next/link'
 import { useAuth } from '../context/authContext'
 
@@ -163,6 +164,14 @@ const Navbar = () => {
                 >
                   <FiHeart className='mr-3' size={18} />
                   <span className='font-medium'>Contact</span>
+                </Link>
+                <Link
+                  href="/faqs"
+                  className='w-full flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-black transition-colors'
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <RiQuestionAnswerLine className='mr-3' size={18} />
+                  <span className='font-medium'>Faqs</span>
                 </Link>
               </div>
             </div>

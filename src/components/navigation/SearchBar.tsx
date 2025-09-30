@@ -161,15 +161,7 @@ const SearchBarInner = () => {
             </div>
 
             {/* Sub Buttons */}
-            <div className="flex gap-3 flex-wrap">
-              {buttonSub.map((item) => (
-                <Link key={item.type} href={item.link}>
-                  <button className="bg-[#F4F4F4] px-3 py-2 text-xs rounded-2xl hover:bg-black hover:text-white transition-colors">
-                    {item.label}
-                  </button>
-                </Link>
-              ))}
-            </div>
+            
           </div>
         ) : (
           /* Desktop Layout */

@@ -17,6 +17,7 @@
 }
 
 body {
+  overflow-x: hidden;
   color: var(--foreground);
   background: var(--background);
   /* font-family: var(--font-montserrat), sans-serif; */
