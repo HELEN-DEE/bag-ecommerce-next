@@ -22,9 +22,9 @@ const logos = [
 
 const BrandSupport = () => {
   return (
-    <section className='mx-4'>
+    <section className='mx-4 -my-10 '>
         <div className='text-center py-4'>
-            <h1 className='text-4xl capitalize my-8'>
+            <h1 className='text-4xl capitalize my-6 '>
                 We are supported by
             </h1>
             <div className='grid grid-cols-2  lg:grid-cols-4 gap-2 justify-items-center'>
