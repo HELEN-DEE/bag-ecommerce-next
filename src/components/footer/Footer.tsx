@@ -75,33 +75,35 @@ const Footer = () => {
 
   return (
     <section className="mx-4 my-8 bg-[#F4F4F4] rounded-2xl">
-      <div className="p-6">
+      <div className="p-4 md:p-6">
         <div className="flex flex-col lg:flex-row lg:justify-between">
-          <div className="lg:w-[50%]">
-            <h1 className="uppercase text-xl w-[65%] pb-5">
+          {/* Newsletter Section */}
+          <div className="w-full lg:w-[50%]">
+            <h1 className="uppercase text-base sm:text-lg md:text-xl w-full lg:w-[65%] pb-4 md:pb-5 leading-snug">
               Subscribe to our newsletter and be the first to know about our
               latest releases, offers and news from bagstore.com
             </h1>
-            <span className="flex justify-between border px-6 py-2 rounded-full w-[60%]">
+            <span className="flex justify-between items-center border px-4 md:px-6 py-2 md:py-2 rounded-full w-full lg:w-[60%] bg-white">
               <input
                 type="email"
                 placeholder="Enter your email here"
-                className="bg-transparent focus:outline-none text-lg flex-1"
+                className="bg-transparent focus:outline-none text-sm md:text-lg flex-1 placeholder:text-gray-400"
               />
-              <button>
+              <button className="flex-shrink-0">
                 <HiArrowRight size={20} />
               </button>
             </span>
             <span className="flex gap-2 pt-3 items-center">
               <input
                 type="radio"
-                className="w-5 h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black"
+                className="w-4 h-4 md:w-5 md:h-5 appearance-none border-2 rounded-full border-gray-400 checked:bg-black flex-shrink-0"
               />
-              <label>I agree to the bagstore privacy policy</label>
+              <label className="text-sm md:text-base">I agree to the bagstore privacy policy</label>
             </span>
           </div>
 
-          <div className="flex justify-between w-[30%] mt-6 lg:mt-0">
+          {/* Menu & Support Links - Hidden on mobile */}
+          <div className="hidden lg:flex justify-between w-[30%] mt-6 lg:mt-0">
             <div>
               <h1 className="capitalize text-2xl">Menu</h1>
               <ul>
@@ -130,30 +132,36 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-between pt-6 items-center flex-wrap">
-          <div className="flex items-center gap-3">
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between pt-6 md:pt-6 items-center gap-4 md:gap-0">
+          {/* Payment Logos */}
+          <div className="flex items-center gap-3 order-2 md:order-1">
             {logoImage.map((logo, index) => (
               <Image
                 key={index}
                 src={logo.image}
                 alt={logo.alt}
-                width={60}
-                height={40}
+                width={50}
+                height={35}
+                className="md:w-[60px] md:h-[40px]"
               />
             ))}
           </div>
-          <div className="flex gap-3">
+          
+          {/* Social Icons */}
+          <div className="flex gap-3 order-3 md:order-2">
             {appIcons.map((app, index) => (
-              <a key={index} href={app.link}>
-                <app.icon size={20} />
+              <a key={index} href={app.link} className="hover:opacity-70 transition-opacity">
+                <app.icon size={20} className="md:w-[20px] md:h-[20px]" />
               </a>
             ))}
           </div>
-          <div>
-            {/* something */}
+          
+          {/* Back to Top Button */}
+          <div className="order-1 md:order-3 w-full md:w-auto flex justify-center md:justify-end">
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors"
+              className="flex items-center gap-2 bg-[#ffffff] px-4 py-3 rounded-full md:rounded-2xl border border-gray-400 hover:bg-black hover:text-white transition-colors text-sm md:text-base"
             >
               Back to top
               <HiArrowUp size={15} />
