@@ -108,7 +108,7 @@ const CheckoutPage: React.FC = () => {
         id: product.id,
         name: getProductTitle(product),
         price: getPrice(product),
-        quantity: 1, // You can modify this based on your cart structure
+        quantity: 1, 
       }))
 
       // Create checkout session
@@ -248,7 +248,7 @@ const CheckoutPage: React.FC = () => {
             <p>Order ID: <span className="font-mono font-medium">#{placedOrder.id}</span></p>
             <p>Total: <span className="font-semibold">${placedOrder.total.toFixed(2)}</span></p>
             <p className="text-sm">
-              Placed on: {new Date(placedOrder.date).toLocaleDateString('en-US', {
+              Placed on: {new Date(placedOrder.date).toLocaleDateString('en', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',

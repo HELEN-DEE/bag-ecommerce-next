@@ -56,15 +56,17 @@ export async function POST(req: NextRequest) {
       success_url: validatedSuccessUrl,
       cancel_url: validatedCancelUrl,
       customer_email: customerEmail,
-      automatic_tax: { enabled: true },
+      // automatic_tax: { enabled: true },
       billing_address_collection: 'required',
       shipping_address_collection: {
         allowed_countries: ['US', 'CA', 'GB', 'AU'],
       },
+      
       metadata: {
         orderType: 'ecommerce',
         source: 'bagstore_website',
       },
+      locale: 'en',
     })
 
     return NextResponse.json({
