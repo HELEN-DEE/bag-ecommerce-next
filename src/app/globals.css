@@ -25,7 +25,8 @@
   animation: slideIn 0.5s ease-out;
 }
 
-body {
+html, body {
+  max-width: 100%;
   overflow-x: hidden;
   color: var(--foreground);
   background: var(--background);
