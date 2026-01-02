@@ -28,9 +28,9 @@ const Support = () => {
             <h1 className='capitalize text-4xl text-center my-8'>
               we support
             </h1>
-            <div className='flex justify-between gap-2'>
+            <div className='flex flex-col gap-4 md:flex-row md:justify-between'>
               {supportItems.map((item,index) =>(
-                <div key={index} className='text-center bg-[#F4F4F4] px-8 py-4 rounded-xl'>
+                <div key={index} className='text-center bg-[#F4F4F4] px-4 py-4 md:px-8 rounded-xl'>
                   <span className='flex justify-center'>
                     {item.icon}
                   </span>
